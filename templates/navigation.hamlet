@@ -1,0 +1,9 @@
+<header>
+ <nav>
+  <ul>
+   <li>
+    <a id="accueil" class="current">Accueil
+   <li>
+    <a id="jeu">Jeu
+   <li>
+    <a id="regleJeu">Règle du jeu
