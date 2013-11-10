@@ -1,0 +1,63 @@
+/*
+ * On attend que le DOM qui complètement créé avant de exécuter les fonctions
+ */
+$(document).ready ( function() {
+	/*	if (localStorage["pageActuelle"] != undefined) {
+				var pageActuelle = localStorage["pageActuelle"];
+				window.location = "../html/page" + pageActuelle + ".html"
+
+		} else {
+			localStorage.clear();
+		}*/
+
+		/*
+		 * Fonction qui génère des valeurs aléatoires pour les points d'habileté,
+		 * les points d'endurance et les pièces d'or du joueur.
+		 */	
+		$( "#pnt_habilete" ).text(Math.floor((Math.random()*10)+10));
+		$( "#pnt_endurance" ).text(Math.floor((Math.random()*10)+20));
+		$( "#pieces_or" ).text(Math.floor((Math.random()*10)+10));
+
+		/*
+		 * Fonction qui valide que l'utilisateur a choisi le bon nombre de disciplines
+		 * et le bon nombre d'objets
+		 */
+		$('form').submit( function(e)  {
+				e.preventDefault(); //Empêche le form de submitter
+
+				var checkedDisciplines = $("fieldset#disciplines input:checked");
+				var checkedObjects = $("fieldset#objets input:checked");
+				var checkedWeapons = $("fieldset#objets input.weapon:checked");
+
+				var disciplineError = "Vous devez choisir EXACTEMENT 3 disciplines";
+				var objectsError = "Vous devez choisir EXACTEMENT 5 objets.";
+				var weaponError = "Vous ne devez pas avoir plus de 2 armes.";
+
+				var messageError = "";
+
+				if (checkedDisciplines.length != 3) {
+						messageError += disciplineError + '\n';
+				}
+				
+				if (checkedObjects.length != 5) {
+						messageError += objectsError + '\n';
+				}
+				
+				if (checkedWeapons.length > 2) {
+						messageError += weaponError + '\n';
+				}
+
+
+				if (messageError == "") {
+
+						//On sauvegarde les valeurs dans le localStorage
+						alert("erreur!!!!!")
+
+						window.location = "../html/page1.html"
+				} else {
+						alert(messageError);
+				}
+				
+		});
+});
+

@@ -27,4 +27,4 @@
 
  <p>‘In the language of the Sommlending,’ he says, his voice wavering, ‘Castle Death.’
 
- <a href="initJeu.html" class="button">Commencer l'aventure
+ <a href=@{InitJeuR} class="button">Commencer l'aventure
