@@ -1,0 +1,111 @@
+<section id="perso_creation">
+<h1>CRÉATION DU PERSONNAGE
+
+<form method="post" action="page1.html">
+<fieldset id="valeurs_aleatoires">
+<legend>Valeurs aléatoires
+
+<table>
+<tr>
+<td class="left">Points d'habileté: 
+<td id="pnt_habilete">18
+
+<tr>
+<td class="left">Points d'endurance: 
+<td id="pnt_endurance">25
+
+<tr>
+<td class="left">Pieces d'or: 
+<td id="pieces_or">10
+
+<fieldset id="disciplines">
+<legend>Disciplines	
+<p>Choisir 3 disciplines:
+
+<section class="left">
+<section>
+<input type="checkbox" name="weaponMastery">
+<label for="weaponMastery">La science des armes
+
+<section>
+<input type="checkbox" name="animalControl">
+<label for="animalControl">Contrôle animal
+
+<section>
+<input type="checkbox" name="curing">
+<label for="curing">Science médical
+
+<section>
+<input type="checkbox" name="invisibility">
+<label for="invisibility">Invisibilité
+
+<section>
+<input type="checkbox" name="huntMastery">
+<label for="huntMastery">Art de la chasse
+
+<section class="right">
+<section>
+<input type="checkbox" name="pathsmanship">
+<label for="pathsmanship">Exploration
+
+<section>
+<input type="checkbox" name="psiSurge">
+<label for="psiSurge">Foudroiement psychique
+
+<section>
+<input type="checkbox" name="psiScreen">
+<label for="psiScreen">Écran psychique
+
+<section>
+<input type="checkbox" name="nexus">
+<label for="nexus">Nexus
+
+<section>
+<input type="checkbox" name="divination">
+<label for="divination">Intuition
+
+<fieldset id="objets">
+<legend>Objets initiaux
+<p>Choisir 5 objets:
+
+<section>
+<input class="weapon" type="checkbox" name="epee">
+<label for="epee">Épée (Arme)
+
+<section>
+<input class="weapon" type="checkbox" name="arc">
+<label for="arc">Arc (Arme)
+
+<section>
+<input type="checkbox" name="carquois">
+<label for="carquois">Carquois (Object spécial)
+
+<section>
+<input type="checkbox" name="corde">
+<label for="corde">Corde (Object contenu dans le sac à dos)
+
+<section>
+<input type="checkbox" name="potionLaumspur">
+<label for="potionLaumspur">Potion de Laumspur (Objet contenu dans le sac à dos)
+
+<section>
+<input class="weapon" type="checkbox" name="poignard">
+<label for="poignard">Poignard (Arme)
+
+<section>
+<input type="checkbox" name="lanterne">
+<label for="lanterne">Lanterne (Object contenu dans le sac à dos)
+
+<section>
+<input class="weapon" type="checkbox" name="masseArmes">
+<label for="masseArmes">Masse d'armes (Arme)
+
+<section>
+<input type="checkbox" name="rationsSpeciales">
+<label for="rationsSpeciales">Trois rations spéciales (Repas)
+
+<section>
+<input type="checkbox" name="grainesFeu">
+<label for="grainesFeu">Trois graines de feu (Object spécial)
+
+<input type="submit" class="button" value="Jouer!">
