@@ -7,3 +7,4 @@
 / HomeR GET
 livreJeu/initJeu InitJeuR GET POST
 livreJeu/accueil AccueilR GET
+livreJeu/regles ReglesR GET

@@ -1,9 +1,9 @@
 <header>
- <nav>
-  <ul>
-   <li>
-    <a id="accueil" class="current">Accueil
-   <li>
-    <a id="jeu">Jeu
-   <li>
-    <a id="regleJeu">Règle du jeu
+    <nav>
+        <ul>
+            <li>    
+                <a id="accueil" href=@{AccueilR} >Accueil
+            <li>
+                <a id="jeu" href=@{InitJeuR}>Jeu
+            <li>
+                <a id="regleJeu" href=@{ReglesR}>Règle du jeu

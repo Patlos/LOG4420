@@ -49,32 +49,31 @@ nav {
 	}
 
 	a {
-	height: 40px;
-	color: white;
-	text-decoration: none;
-	padding: 20px 20px;
+		height: 40px;
+		color: white;
+		text-decoration: none;
+		padding: 20px 20px;
 
-		.current {
-		background-color: gray;
+		&.current {
+			background-color: gray;
 		}
 
-		:hover {
+		&:hover {
 			color: lightgray;
 		}
 	}
 }
 
 
-
 /* FOOTER */
 footer {
-	width: 100%; /* L'en-tête doit prendre toute la largeur */
-	top: 0px; /* L'en-tête doit être collé en haut */
-	height: 40px; /* L'en-tête a une taille spécifique */
-	padding-top: 20px; /* BUG: Sans cette ligne, le haut de la boîte 'body' ne s'affiche pas en haut complètement.*/ 
+	width: 100%;
+	top: 0px; 
+	height: 40px;
+	padding-top: 20px;
 	padding-bottom: 10px;
-	background-color: rgba(1,1,1,0.8); /* Couleur arrière-plan légèrement transparent */
-	text-align: center; /* On aligne le texte à l'intérieur de l'en-tête au centre */
+	background-color: rgba(1,1,1,0.8);
+	text-align: center;
 	-webkit-box-shadow: 0px 0px 15px 0px #000000;
 	-moz-box-shadow: 0px 0px 15px 0px #000000;
 	box-shadow: 0px 0px 15px 0px #000000;
@@ -118,7 +117,7 @@ footer {
 		text-align:center;
 		margin: 0px auto;
 
-		:hover {
+		&:hover {
 		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
 		background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
 		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
