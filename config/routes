@@ -5,6 +5,6 @@
 /robots.txt RobotsR GET
 
 / HomeR GET
-livreJeu/initJeu InitJeuR GET POST
+livreJeu/initJeu InitJeuR GET
 livreJeu/accueil AccueilR GET
 livreJeu/regles ReglesR GET

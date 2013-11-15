@@ -1,0 +1,24 @@
+<img src="../static/img/lonewolf.gif">
+<section id="perso_creation">
+ <h1>CRÉATION DU PERSONNAGE
+
+ <form method="post" enctype=#{enctype}>
+  <fieldset id="valeurs_aleatoires">
+   <legend>Valeurs aléatoires
+
+   <table>
+    <tr>
+     <td class="left">Points d'habileté: 
+     <td id="pnt_habilete">18
+
+    <tr>
+     <td class="left">Points d'endurance: 
+     <td id="pnt_endurance">25
+
+    <tr>
+     <td class="left">Pieces d'or: 
+     <td id="pieces_or">10
+
+  ^{widget}
+
+  <input type="submit" class="button" value="Jouer!">
