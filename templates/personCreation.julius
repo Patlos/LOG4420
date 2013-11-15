@@ -27,7 +27,7 @@ $(document).ready ( function() {
 
 				var checkedDisciplines = $("fieldset#disciplines input:checked");
 				var checkedObjects = $("fieldset#objets input:checked");
-				var checkedWeapons = $("fieldset#objets input.weapon:checked");
+				var checkedWeapons = $("fieldset#objets section.weapon input:checked");
 
 				var disciplineError = "Vous devez choisir EXACTEMENT 3 disciplines";
 				var objectsError = "Vous devez choisir EXACTEMENT 5 objets.";
@@ -51,11 +51,11 @@ $(document).ready ( function() {
 				if (messageError == "") {
 
 						//On sauvegarde les valeurs dans le localStorage
-						alert("erreur!!!!!")
-
-						window.location = "../html/page1.html"
+						alert("submit!!!!!")
+						return true;
 				} else {
 						alert(messageError);
+						return false;
 				}
 				
 		});

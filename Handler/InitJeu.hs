@@ -112,10 +112,10 @@ personForm extra = do
                 <fieldset id="objets">
                  <legend>Objets initiaux
                  <p>Choisir 5 objets:
-                  <section>
+                  <section .weapon>
                    ^{fvInput epeeView}
                    <label for="epee">Épée (Arme)
-                  <section>
+                  <section .weapon>
                    ^{fvInput arcView}
                    <label for="arc">Arc (Arme)
                   <section>
@@ -127,13 +127,13 @@ personForm extra = do
                   <section>
                    ^{fvInput potionLaumspurView}
                    <label for="potionLaumspur">Potion de Laumspur (Objet contenu dans le sac à dos)
-                  <section>
+                  <section .weapon>
                    ^{fvInput poignardView}
                    <label for="poignard">Poignard (Arme)
                   <section>
                    ^{fvInput lanterneView}
                    <label for="lanterne">Lanterne (Object contenu dans le sac à dos)
-                  <section>
+                  <section .weapon>
                    ^{fvInput masseArmesView}
                    <label for="masseArmes">Masse d'armes (Arme)
                   <section>
@@ -153,7 +153,7 @@ defaultLayout $ do
 setTitle "Castle Death"
 addScriptRemote "//code.jquery.com/jquery-1.10.1.js"
 toWidget [julius|
-	$("#jeu").addClass("current");
+    $("#jeu").addClass("current");
 |]
 $(widgetFile "navigation")
 $(widgetFile "personCreation")
