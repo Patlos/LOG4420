@@ -23,8 +23,7 @@ $(document).ready ( function() {
 		 * et le bon nombre d'objets
 		 */
 		$('form').submit( function(e)  {
-				e.preventDefault(); //Empêche le form de submitter
-
+		
 				var checkedDisciplines = $("fieldset#disciplines input:checked");
 				var checkedObjects = $("fieldset#objets input:checked");
 				var checkedWeapons = $("fieldset#objets section.weapon input:checked");

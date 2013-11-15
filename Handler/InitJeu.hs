@@ -1,30 +1,29 @@
 module Handler.InitJeu where
 
-import 		Import
+import Import
 
 data Person = Person
-    { 	weaponMastery	:: Maybe Bool
-	,	animalControl	:: Maybe Bool
-	,	curing			:: Maybe Bool
-	,	invisibility	:: Maybe Bool
-	,	huntMastery		:: Maybe Bool
-	,	pathsmanship	:: Maybe Bool
-	,	psiSurge		:: Maybe Bool
-	,	psiScreen		:: Maybe Bool
-	,	nexus			:: Maybe Bool
-	,	divination		:: Maybe Bool
-	,	epee			:: Maybe Bool
-	,	arc				:: Maybe Bool
-	,	carquois		:: Maybe Bool
-	,	corde			:: Maybe Bool
-	,	potionLaumspur	:: Maybe Bool
-	,	poignard		:: Maybe Bool
-	,	lanterne		:: Maybe Bool
-	,	masseArmes		:: Maybe Bool
-	,	rationsSpeciales:: Maybe Bool
-	,	grainesFeu		:: Maybe Bool
-    }
-    deriving Show
+    {weaponMastery    :: Maybe Bool
+    ,animalControl    :: Maybe Bool
+    ,curing           :: Maybe Bool
+    ,invisibility     :: Maybe Bool
+    ,huntMastery      :: Maybe Bool
+    ,pathsmanship     :: Maybe Bool
+    ,psiSurge         :: Maybe Bool
+    ,psiScreen        :: Maybe Bool
+    ,nexus            :: Maybe Bool
+    ,divination       :: Maybe Bool
+    ,epee             :: Maybe Bool
+    ,arc              :: Maybe Bool
+    ,carquois         :: Maybe Bool
+    ,corde            :: Maybe Bool
+    ,potionLaumspur   :: Maybe Bool
+    ,poignard         :: Maybe Bool
+    ,lanterne         :: Maybe Bool
+    ,masseArmes       :: Maybe Bool
+    ,rationsSpeciales :: Maybe Bool
+    ,grainesFeu       :: Maybe Bool
+    }deriving Show
 
 personForm :: Html -> MForm Handler (FormResult Person, Widget)
 personForm extra = do
@@ -142,22 +141,33 @@ personForm extra = do
                   <section>
                    ^{fvInput grainesFeuView}
                    <label for="grainesFeu">Trois graines de feu (Object spécial)
-                <input type="submit" class="button" value="Jouer!">
             |]
     return (personRes, widget)
 
 getInitJeuR :: Handler Html
 getInitJeuR = do
-((res, widget), enctype) <- runFormGet personForm
-defaultLayout $ do
-setTitle "Castle Death"
-addScriptRemote "//code.jquery.com/jquery-1.10.1.js"
-toWidget [julius|
-    $("#jeu").addClass("current");
-|]
-$(widgetFile "navigation")
-$(widgetFile "personCreation")
-$(widgetFile "footer")
-$(widgetFile "main")
+    ((res, widget), enctype) <- runFormGet personForm
+    defaultLayout $ do
+        setTitle "Castle Death"
+        addScriptRemote "//code.jquery.com/jquery-1.10.1.js"
+        toWidget [julius|
+            $("#jeu").addClass("current");
+        |]
+        $(widgetFile "navigation")
+        $(widgetFile "personCreation")
+        $(widgetFile "footer")
+        $(widgetFile "main")
 
-
+postInitJeuR :: Handler Html
+postInitJeuR  = do
+    ((result, widget), enctype) <- runFormPostNoToken personForm
+    case result of
+        FormSuccess person -> do
+            defaultLayout [whamlet|<p>#{show person}|]
+        _ -> defaultLayout
+            [whamlet|
+                <p>Post form failed, let's try again.
+                <form method=post action=@{InitJeuR} enctype=#{enctype}>
+                    ^{widget}
+                    <button>Submit
+            |]
