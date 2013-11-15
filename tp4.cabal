@@ -23,6 +23,7 @@ library
                      Handler.InitJeu
                      Handler.Accueil
                      Handler.Regles
+                     Handler.Page
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT

@@ -8,3 +8,4 @@
 livreJeu/initJeu InitJeuR GET
 livreJeu/accueil AccueilR GET
 livreJeu/regles ReglesR GET
+/livreJeu/page/#Text PageR GET POST
