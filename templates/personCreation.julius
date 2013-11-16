@@ -14,9 +14,13 @@ $(document).ready ( function() {
 		 * Fonction qui génère des valeurs aléatoires pour les points d'habileté,
 		 * les points d'endurance et les pièces d'or du joueur.
 		 */	
-		$( "#pnt_habilete" ).text(Math.floor((Math.random()*10)+10));
-		$( "#pnt_endurance" ).text(Math.floor((Math.random()*10)+20));
-		$( "#pieces_or" ).text(Math.floor((Math.random()*10)+10));
+		var pointHabilete = Math.floor((Math.random()*10)+10);
+		var pointEndurance = Math.floor((Math.random()*10)+20);
+		var piecesOr = Math.floor((Math.random()*10)+10);
+		$( "#pnt_habilete" ).text(pointHabilete);
+		$( "#pnt_endurance" ).text(pointEndurance);
+		$( "#pieces_or" ).text(piecesOr);
+
 
 		/*
 		 * Fonction qui valide que l'utilisateur a choisi le bon nombre de disciplines

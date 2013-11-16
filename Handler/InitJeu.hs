@@ -1,4 +1,4 @@
-module Handler.InitJeu where
+﻿module Handler.InitJeu where
 
 import Import
 
@@ -163,7 +163,68 @@ postInitJeuR  = do
     ((result, widget), enctype) <- runFormPostNoToken personForm
     case result of
         FormSuccess person -> do
-            defaultLayout [whamlet|<p>#{show person}|]
+            case weaponMastery person of
+                Just True -> setSession "weaponMastery" "yes"
+                _ -> deleteSession "weaponMastery"
+            case animalControl person of
+                Just True -> setSession "animalControl" "yes"
+                _ -> deleteSession "animalControl"
+            case curing person of
+                Just True -> setSession "curing" "yes"
+                _ -> deleteSession "curing"
+            case invisibility person of
+                Just True -> setSession "invisibility" "yes"
+                _ -> deleteSession "invisibility"
+            case huntMastery person of
+                Just True -> setSession "huntMastery" "yes"
+                _ -> deleteSession "huntMastery"
+            case pathsmanship person of
+                Just True -> setSession "pathsmanship" "yes"
+                _ -> deleteSession "pathsmanship"
+            case psiSurge person of
+                Just True -> setSession "psiSurge" "yes"
+                _ -> deleteSession "psiSurge"
+            case psiScreen person of
+                Just True -> setSession "psiScreen" "yes"
+                _ -> deleteSession "psiScreen"
+            case nexus person of
+                Just True -> setSession "nexus" "yes"
+                _ -> deleteSession "nexus"
+            case divination person of
+                Just True -> setSession "divination" "yes"
+                _ -> deleteSession "divination"
+            case epee person of
+                Just True -> setSession "epee" "yes"
+                _ -> deleteSession "epee"
+            case arc person of
+                Just True -> setSession "arc" "yes"
+                _ -> deleteSession "arc"
+            case carquois person of
+                Just True -> setSession "carquois" "yes"
+                _ -> deleteSession "carquois"
+            case corde person of
+                Just True -> setSession "corde" "yes"
+                _ -> deleteSession "corde"
+            case potionLaumspur person of
+                Just True -> setSession "potionLaumspur" "yes"
+                _ -> deleteSession "potionLaumspur"
+            case poignard person of
+                Just True -> setSession "poignard" "yes"
+                _ -> deleteSession "poignard"
+            case lanterne person of
+                Just True -> setSession "lanterne" "yes"
+                _ -> deleteSession "lanterne"
+            case masseArmes person of
+                Just True -> setSession "masseArmes" "yes"
+                _ -> deleteSession "masseArmes"
+            case rationsSpeciales person of
+                Just True -> setSession "rationsSpeciales" "yes"
+                _ -> deleteSession "rationsSpeciales"
+            case grainesFeu person of
+                Just True -> setSession "grainesFeu" "yes"
+                _ -> deleteSession "grainesFeu"
+            sess <- getSession
+            redirect $ PageR 1
         _ -> defaultLayout
             [whamlet|
                 <p>Post form failed, let's try again.
