@@ -1,0 +1,15 @@
+<section id="story">
+
+    <p>With your trembling hands clasped tightly around the slippery green rope, you fight to lock your feet together to prevent yourself from sliding into the heaving swell. The crack of splintering wood fills the night as the coracle shatters and sinks without trace.
+
+    <img src="../static/imgmonster_big_serpent.png" class="monster" />
+
+    <p>A sudden jolt runs the length of the rope, and a snaky head rises from the black water. It dips and swerves upwards, opening its jaws, set with fangs like long yellow knives, and fixing you with its blind white eyes. You are clinging to the body of a deadly Lekhor that is poised to strike.
+
+
+    <section id="decision">
+        <img src="../static/img/decision.png" />
+        <div>
+            <p>If you wish to release your grip of this deadly serpent and dive into the water, <a href="page325.html">turn to 325.
+
+            <p>If you wish to draw a weapon and defend yourself against its venomous attack, <a href="">turn to 76.

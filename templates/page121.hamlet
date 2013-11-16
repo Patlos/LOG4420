@@ -1,57 +1,6 @@
 <section id="story">
- <p>The tentacle lifts you into the air, tightening its grip with each passing second until almost all the breath is squeezed from your lungs. Suddenly you are hurled towards another massive boulder, which opens to reveal a monstrous jaw dripping with loathsome saliva. You are swallowed whole.
+    <p>The tentacle lifts you into the air, tightening its grip with each passing second until almost all the breath is squeezed from your lungs. Suddenly you are hurled towards another massive boulder, which opens to reveal a monstrous jaw dripping with loathsome saliva. You are swallowed whole.
 
- <p>Your life and your quest ends here...
+    <p>Your life and your quest ends here...
 
- <img id="gameover" src="../image/gameover.jpg" />
-
-<section id="stats">
- <img src="../image/scroll.jpg" />
- <div id="stats_data">
-  <h2>État courant du joueur</h2>
-  <table>
-   <tr>
-   <td class="left">
-    <img src="../image/points_endurance.png" />
-   <td class="right">
-    <span id="pnt_endurance_restante">20/
-    <span id="pnt_endurance_total">20
-
-  <tr id="pnt_attaque">
-   <td class="left">
-    <img src="../image/points_attaque.png" />
-   <td class="right">
-    <span id="nb_pnt_attaque">30
-
-  <tr>
-   <td class="left">
-    <img src="../image/pieces_or.png" />
-   <td class="right">
-    <span id="nb_pieces_or">10
-    / 50
-  </tr>
-
-
- <h3>Disciplines</h3>
- <ul id="disciplines">
- </ul>
- </section>
- </section>
-
- <p><a href="#lightbox" class="button">Regarder Sac À Dos</a></p>
-
-<div id="lightbox">
-<section id="sac_a_dos">
-<a href="#" class="close_msg"></a>
-<img src="../image/backpack.png" />
-<ul>
-<!--li name="Épée">Épée</li>
-<li name="Poignard">Poignard</li>
-<li name="Carquois">Carquois</li>
-<li name="Corde">Corde</li>
-<li name="Lanterne">Lanterne</li-->
-</ul>
-</section>
-</div>	
-
-<a href="page1.html" id="recommencer" class="button">Recommencer l'histoire</a>
+    <img id="gameover" src="../static/img/gameover.jpg" />

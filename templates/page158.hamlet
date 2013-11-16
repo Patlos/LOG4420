@@ -1,0 +1,18 @@
+<section id="story">
+    <p>Gasping for air, you claw your way to the surface and swim for the rocky shore. Heaving yourself from the cold water, you crouch down, breathless and exhausted, beside a line of huge boulders, half-buried in the coal-black sand, and take stock of your belongings. You have lost two items from your Backpack, and all the food has been ruined by the tainted water (erase all Meals and two Backpack Items of your choice from your Action Chart).
+
+	<!-- Prise de décision... -->			
+    <section id="jeterObjets">
+        <fieldset>
+            <legend>Choisir 2 Items À Jeter...
+        <button class="button">Jeter!
+
+
+    <p>No sooner have you managed to control your breathing than you hear the sound of scraping, as if some heavy weight were being dragged across the rocks to your left. A vertical crack appears in the surface of the nearest boulder, and a sickly yellow light washes over you. It is not a boulder—you are staring at a huge eye.
+
+    <section id="decision">
+        <img src="../image/decision.png" />
+        <div>
+            <p>If you wish to draw your weapon and attack the eye, <a href="page265.html">turn to 265.
+
+            <p>If you wish to leap to your feet and escape towards the sheer rock base of Kazan-Oud, <a href="">turn to 41.

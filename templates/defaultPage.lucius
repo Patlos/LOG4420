@@ -1,0 +1,385 @@
+body {
+        background-color: #ffffe6;
+}
+
+a.button {
+                margin: 40px;
+}
+
+header img {
+        display: block;
+        margin: 10px 10%;
+        margin-top: 30px;
+}
+
+header p {
+        position: absolute;
+        top: 127px;
+        left: 497px;
+        margin: 0px 10%;
+        font-weight: bold;
+        font-size: 1.1em;
+        width: 50px;
+        text-align: center;
+}
+
+section {
+        font-family: Souvenir, Georgia, "Times New Roman", Times, serif;
+}
+
+section#story {
+        position: relative;
+        left: 20px;
+        width: 550px;
+        text-align: justify;
+        margin: 0px 10%;
+}
+
+section#story section#decision {
+        border: 5px gray groove;
+        border-radius: 20px;
+        padding: 20px 20px;
+}
+
+section#story section#decision a {
+        text-decoration: none;
+        color: green;
+        font-weight: bold;
+}
+
+section#story section#decision img {
+        width: 172px;
+        height: 132px;
+        display: inline-block;
+        margin-right: 30px;
+}
+
+section#story section#decision div {
+        display: inline-block;
+        vertical-align: top;
+        width: 280px;
+}
+
+section#story img.monster {
+        width: 200px;
+        height: 340px;
+        display: inline-block;
+        margin: 20px 0;
+        margin-right: 50px;
+}
+
+section#story img.monster+p {
+        width: 295px;
+        display: inline-block;
+        vertical-align: top;
+}
+
+section#story p.situation button {
+    margin: 15px 0px 30px;
+    width: 90px;
+    height: 40px;
+    line-height: 0;
+}
+
+/*
+ * STATISTIQUES DU JOUEUR
+ */
+section#stats {
+        position: fixed;
+        top: 80px;
+        left: 750px;
+        margin: 0px 10%;
+        height: 600px;
+}
+
+section#stats > img {
+        width: 380px;
+        height: 560px;
+}
+
+section#stats div#stats_data {
+        position: relative;
+        bottom: 520px;
+        left: 70px;
+}
+
+section#stats ul#disciplines {
+                list-style: none;
+}
+
+section#stats ul#disciplines li {
+        font-size: 16px;
+        font-family: Georgia; 
+}
+
+section#stats ul#disciplines li.second {
+        padding: 10px 0;
+}
+
+section#stats div#stats_data img {
+        display: block;
+        margin: 0px auto;
+}
+
+section#stats tr#pnt_attaque img{
+                margin: 15px auto;
+}
+
+section#stats td.right {
+        padding: 0 15px;
+        font-size: 20px;
+}
+
+
+/*
+ * SECTION DU SAC À DOS 
+ */
+p a.button {
+        position: fixed;
+        top: 635px;
+        left: 830px;
+        margin: 0px 10%;
+}
+
+div#lightbox {
+        display: none;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+}
+
+div#lightbox:target {
+        display: block;
+}
+
+div.lightbox section .closemsg {
+                display: block;
+                margin: auto;
+                height: 0;
+                overflow: visible;
+                text-align: right;
+                z-index: 5001;
+                cursor: default;
+}
+
+section#sac_a_dos img {
+                position: relative;
+                width: 380px;
+                height: 560px;
+                display: block;
+                margin: 50px auto;
+}
+
+section#sac_a_dos ul {
+        position:relative;
+        bottom: 410px;
+        color: white;
+        list-style: none;
+        width: 330px;
+        margin: 0px auto;
+        padding: 0;
+}
+
+section#sac_a_dos li {
+                text-align: center;
+                font-size: 1.2em;
+}
+
+.close_msg::before {
+                content: "";
+                display: block;
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #000000;
+                opacity: 0.85;
+}
+
+.close_msg::after {
+                content: "\00D7";
+                display: block;
+                position: relative;
+                top: 105px;
+                left: 185px;
+                z-index: 5002;
+                color: #ffffff;
+                border: 1px #ffffff solid;
+                border-radius: 10px;
+            width: 20px;
+                height: 20px;
+                line-height: 18px;
+                text-align: center;
+            margin: 0 auto;
+                background-color: #000000;
+                font-weight: bold;
+                cursor: pointer;
+}
+
+/*
+ * SECTION CONTENU LES COMBATS
+ */
+section#combat {
+        border: 5px gray groove;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        padding-left: 30px;
+}
+
+section#combat button.button {
+        display: inline-block;
+        width: 120px;
+        height: 40px;
+        font-size:13px;
+        margin: 15px;
+        line-height: 0;
+}
+
+/*
+ * SECTION D'UNE MISE EN SITUATION POUR JETER DES OBJETS.
+ */
+section#jeterObjets button {
+        margin: 15px 0 30px 0;
+        width: 75px;
+        height: 40px;
+        line-height: 0;
+}
+
+section#jeterObjets label {
+        margin-right: 10px;
+}
+
+
+@media screen and (max-width: 1250px) {
+
+header img {
+    margin: 10px 10px;
+    margin-top: 30px;
+}
+
+header p {
+    margin: 0 10px;
+}
+
+section#story {
+    margin: 0 5%;
+    width: 450px;
+}
+
+section#story img.monster {
+    margin-right: 40px;
+}
+
+section#story img.monster + p {
+    width: 200px;
+}
+
+section#story section#decision img {
+        display: block;
+        margin: 0 auto;
+}
+
+section#story section#decision div {
+        display: block;
+        margin: 0 auto;
+}
+
+section#story img#gameover {
+    width: 426px;
+    height: 320px;
+}
+
+section#stats {
+        left: 500px;
+}
+
+p a.button {
+    position: fixed;
+    left: 590px;
+    margin: 0px 10%;
+}
+
+}
+
+@media screen and (max-width: 1000px) {
+    
+section#story {
+    width: 80%;
+    margin: 0 auto;
+}
+
+section#story section#decision img {
+    display: block;
+    margin: 0 auto;
+}
+
+section#story section#decision div {
+    display: block;
+    width: 90%;
+}
+
+section#story img#gameover {
+    width: 213;
+    height: 160px;
+}
+
+section#story img.monster {
+        display: block;
+        margin: 0 auto;
+}
+
+section#story img.monster + p {
+    width: 100%;
+}
+
+section#story img#gameover {
+    display: block;
+    width: 320px;
+    height: 240px;
+    margin-bottom: 50px;
+}
+
+section#stats {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+}
+
+section#stats img {
+    display: block;
+    margin: 0 auto;
+}
+
+section#stats div#stats_data {
+    width: 300px;
+    margin: 0 auto;
+    left: 30px;
+}
+
+p a.button {
+    position: relative;
+    left: 0;
+    top: -50px;
+    margin: 0 auto;
+}
+
+section#sac_a_dos img {
+    width: 292px;
+    height: 430px;
+}
+
+section#sac_a_dos ul {
+    bottom: 320px;
+    width: 220px;
+    right: 15px;
+}
+
+.close_msg:after {
+    left: 145px;
+}
+
+}

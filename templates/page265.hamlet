@@ -1,0 +1,20 @@
+<section id="story">
+    <p>You plunge your weapon into the monstrous eye and gouts of a luminous jelly-like substance pour from the wound. A ghastly inhuman scream of pain rises from the ground beneath your feet. Jets of hissing steam erupt through the sand, and a stinging cloud of grit assails your eyes.
+
+    <img src="../static/img/monster_luminous_jelly.png" class="monster" />
+    <p class="situation">You reel backwards, shielding your face from the blast, but an unexpected blow to your legs sends you sprawling to the ground (lose 
+        <span id="lifeLost">2 #
+        ENDURANCE points).
+        <button id="confirmLossPnt" class="button">Confirmer
+
+    <p>Before you can rise, a warty, green tentacle coils round your waist and pulls you slowly towards the mutilated eye.
+
+    <section id="decision">
+        <img src="../static/img/decision.png" />
+        <div>
+            <p>If you have the 
+                <i name="psiSurge">Magnakai Discipline of Psi-surge #
+                and wish to use it, 
+                <a href="">turn to 190.
+
+            <p>If you do not possess this skill, or if you do not wish to use it, <a href="page121.html">turn to 121.

@@ -1,0 +1,22 @@
+<section id="story">
+			<p>You strike the seething water with a mighty splash and sink like a stone. The sharp tang of the lake fills your mouth, and its icy cold embrace numbs your muscles. Your first impulse on hitting the water is to lash out with your arms and swim, but you are hampered by a mass of plant life that coils around your flailing limbs. Desperate for air, you hack blindly at the weeds that now threaten to drag you to a watery grave.
+
+			<p>Fight the combat as normal. However, due to your lack of air, you must automatically deduct 2 ENDURANCE points for every round that you fight.
+
+
+    <section id="combat">
+        <p id="monster_name">
+            <strong>Black Lakeweed: #
+            COMBAT SKILL 
+            <span id="pnt_attaque_monstre">10 #    
+            ENDURANCE 
+            <span id="pnt_endurance_monstre">50
+
+    <section class="choixCombat">
+        <button id="combattre" class="button">COMBATTRE
+        <button id="fuir" class="button">FUIR
+
+    <section id="decision">
+        <img src="../image/decision.png" />
+        <div>
+            <p>If you survive the struggle, <a href="page158.html">turn to 158.
