@@ -18,8 +18,11 @@ $(document).ready ( function() {
 		var pointEndurance = Math.floor((Math.random()*10)+20);
 		var piecesOr = Math.floor((Math.random()*10)+10);
 		$( "#pnt_habilete" ).text(pointHabilete);
+		$( "#input_pnt_habilete input").val(pointHabilete);
 		$( "#pnt_endurance" ).text(pointEndurance);
+		$( "#input_pnt_endurance input").val(pointEndurance);
 		$( "#pieces_or" ).text(piecesOr);
+		$( "#input_pieces_or input").val(piecesOr);
 
 
 		/*
@@ -52,9 +55,6 @@ $(document).ready ( function() {
 
 
 				if (messageError == "") {
-
-						//On sauvegarde les valeurs dans le localStorage
-						alert("submit!!!!!")
 						return true;
 				} else {
 						alert(messageError);

@@ -3,22 +3,6 @@
  <h1>CRÉATION DU PERSONNAGE
 
  <form method="post" action=@{InitJeuR} enctype=#{enctype}>
-  <fieldset id="valeurs_aleatoires">
-   <legend>Valeurs aléatoires
-
-   <table>
-    <tr>
-     <td class="left">Points d'habileté: 
-     <td id="pnt_habilete">
-
-    <tr>
-     <td class="left">Points d'endurance: 
-     <td id="pnt_endurance">
-
-    <tr>
-     <td class="left">Pieces d'or: 
-     <td id="pieces_or">
-
   ^{widget}
   <input type="submit" class="button" value="Jouer!">
 

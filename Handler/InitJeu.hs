@@ -3,7 +3,10 @@
 import Import
 
 data Person = Person
-    {weaponMastery    :: Maybe Bool
+    {pointHabilete    :: Text
+    ,pointEndurance   :: Text
+    ,piecesOr         :: Text
+    ,weaponMastery    :: Maybe Bool
     ,animalControl    :: Maybe Bool
     ,curing           :: Maybe Bool
     ,invisibility     :: Maybe Bool
@@ -27,6 +30,9 @@ data Person = Person
 
 personForm :: Html -> MForm Handler (FormResult Person, Widget)
 personForm extra = do
+    (pointHabileteRes, pointHabileteView) <- mreq hiddenField "pointHabilete" Nothing
+    (pointEnduranceRes, pointEnduranceView) <- mreq hiddenField "pointEndurance" Nothing
+    (piecesOrRes, piecesOrView) <- mreq hiddenField "piecesOr" Nothing
     (weaponMasteryRes, weaponMasteryView) <- mopt checkBoxField "weaponMastery" Nothing
     (animalControlRes, animalControlView) <- mopt checkBoxField "animalControl" Nothing
     (curingRes, curingView) <- mopt checkBoxField "curing" Nothing
@@ -47,7 +53,10 @@ personForm extra = do
     (masseArmesRes, masseArmesView) <- mopt checkBoxField "masseArmes" Nothing
     (rationsSpecialesRes, rationsSpecialesView) <- mopt checkBoxField "rationsSpeciales" Nothing
     (grainesFeuRes, grainesFeuView) <- mopt checkBoxField "grainesFeu" Nothing
-    let personRes = Person <$> weaponMasteryRes 
+    let personRes = Person <$> pointHabileteRes
+                           <*> pointEnduranceRes
+                           <*> piecesOrRes
+                           <*> weaponMasteryRes 
                            <*> animalControlRes 
                            <*> curingRes 
                            <*> invisibilityRes 
@@ -73,6 +82,24 @@ personForm extra = do
                 |]
             [whamlet|
                 #{extra}
+                <fieldset id="valeurs_aleatoires">
+                 <legend>Valeurs aléatoires
+                 <table>
+                  <tr>
+                   <td class="left">Points d'habileté: 
+                   <td id="pnt_habilete">
+                   <td id="input_pnt_habilete">
+                    ^{fvInput pointHabileteView}
+                  <tr>
+                   <td class="left">Points d'endurance: 
+                   <td id="pnt_endurance">
+                   <td id="input_pnt_endurance">
+                    ^{fvInput pointEnduranceView}
+                  <tr>
+                   <td class="left">Pieces d'or: 
+                   <td id="pieces_or">
+                   <td id="input_pieces_or">
+                    ^{fvInput piecesOrView}
                 <fieldset id="disciplines">
                  <legend>Disciplines
                  <p>Choisir 3 disciplines:
@@ -163,6 +190,9 @@ postInitJeuR  = do
     ((result, widget), enctype) <- runFormPostNoToken personForm
     case result of
         FormSuccess person -> do
+            setSession "pointHabilete" $ pointHabilete person
+            setSession "pointEndurance" $ pointEndurance person
+            setSession "piecesOr" $ piecesOr person
             case weaponMastery person of
                 Just True -> setSession "weaponMastery" "yes"
                 _ -> deleteSession "weaponMastery"
@@ -223,12 +253,18 @@ postInitJeuR  = do
             case grainesFeu person of
                 Just True -> setSession "grainesFeu" "yes"
                 _ -> deleteSession "grainesFeu"
-            sess <- getSession
+            -- sess <- getSession
             redirect $ PageR 1
-        _ -> defaultLayout
-            [whamlet|
-                <p>Post form failed, let's try again.
-                <form method=post action=@{InitJeuR} enctype=#{enctype}>
-                    ^{widget}
-                    <button>Submit
-            |]
+        _ -> defaultLayout $ do
+                setTitle "Castle Death"
+                addScriptRemote "//code.jquery.com/jquery-1.10.1.js"
+                toWidget [julius|
+                    $("#jeu").addClass("current");
+                |]
+                $(widgetFile "navigation")
+                toWidget [hamlet|
+                    <p>Post form failed, let's try again.
+                |]
+                $(widgetFile "personCreation")
+                $(widgetFile "footer")
+                $(widgetFile "main")
