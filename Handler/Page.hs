@@ -158,13 +158,13 @@ getPageR pagedId = defaultLayout  $ do
                 <nav>
                     <ul>
                         <li>
-                            <a id="accueil">Accueil
+                            <a id="accueil" href=@{AccueilR}>Accueil
                         <li>
-                            <a id="jeu" class="current">Jeu
+                            <a id="jeu" class="current" @{InitJeuR}>Jeu
                         <li>
-                            <a id="regleJeu">Règle du jeu
+                            <a id="regleJeu" href=@{ReglesR}>Règle du jeu
                 <img src="../../static/img/castle_death_logo.png" />
-                <p id="pageNumber">#pagedId</p>|]
+                <p id="pageNumber">#{pagedId}</p>|]
     findPageText pages pagedId
     $(widgetFile "defaultPage")
     $(widgetFile "footer")
