@@ -3,6 +3,7 @@
 module Handler.Page where
 
 import Import
+import Data.Text
 
 data Page = Page Int Widget
 
@@ -149,7 +150,6 @@ page265 = [whamlet|<section id="story">
                 <a href="@{PageR 121}">turn to 121.|]
 
 
-
 pages :: [Page]
 pages = [Page 1 (toWidget page1), Page 135 (toWidget page135), Page 121 (toWidget page121), Page 158 (toWidget page158), Page 203 (toWidget page203),Page 325 (toWidget page325), Page 265 (toWidget page265)]
 
@@ -166,7 +166,9 @@ eliminate Nothing  = value
 
 getPageR :: Int -> Handler Html
 getPageR pagedId = do
+    setSession (pack "LastPage") $ pack (show pagedId)
     defaultLayout  $ do
+        setTitle "Castle Death"
         pointHabilete <- lookupSession "pointHabilete"
         pointEndurance <- lookupSession "pointEndurance"
         piecesOr <- lookupSession "piecesOr"
@@ -188,16 +190,6 @@ getPageR pagedId = do
         |]
         findPageText pages pagedId
         $(widgetFile "defaultPage")
-        toWidget [whamlet|
-            <p>
-             <a href="#lightbox" class="button">Regarder Sac À Dos
-            <div id="lightbox">
-             <section id="sac_a_dos">
-              <a href="#" class="close_msg">
-              <img src="../../static/img/backpack.png"/>
-              <ul>        
-            <a href="page1.html" id="recommencer" class="button">Recommencer l'histoire
-        |]
         $(widgetFile "footer")
         $(widgetFile "main")
 

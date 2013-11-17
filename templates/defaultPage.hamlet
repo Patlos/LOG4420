@@ -23,3 +23,14 @@
                     / 50
         <h3>Disciplines
         <ul id="disciplines">
+
+<p>
+    <a href="#lightbox" class="button">Regarder Sac À Dos
+
+<div id="lightbox">
+    <section id="sac_a_dos">
+        <a href="#" class="close_msg">
+        <img src="../../static/img/backpack.png"/>
+        <ul>
+
+<a href="page1.html" id="recommencer" class="button">Recommencer l'histoire
