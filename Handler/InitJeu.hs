@@ -238,34 +238,34 @@ postInitJeuR  = do
                 Just True -> setSession "divination" "Intuition|"
                 _ -> deleteSession "divination"
             case epee person of
-                Just True -> setSession "epee" "epee|"
+                Just True -> setSession "epee" "Epée|"
                 _ -> deleteSession "epee"
             case arc person of
-                Just True -> setSession "arc" "arc|"
+                Just True -> setSession "arc" "Arc|"
                 _ -> deleteSession "arc"
             case carquois person of
-                Just True -> setSession "carquois" "carquois|"
+                Just True -> setSession "carquois" "Carquois|"
                 _ -> deleteSession "carquois"
             case corde person of
-                Just True -> setSession "corde" "corde|"
+                Just True -> setSession "corde" "Corde|"
                 _ -> deleteSession "corde"
             case potionLaumspur person of
-                Just True -> setSession "potionLaumspur" "potionLaumspur|"
+                Just True -> setSession "potionLaumspur" "Potion de Laumspur|"
                 _ -> deleteSession "potionLaumspur"
             case poignard person of
-                Just True -> setSession "poignard" "poignard|"
+                Just True -> setSession "poignard" "Poignard|"
                 _ -> deleteSession "poignard"
             case lanterne person of
-                Just True -> setSession "lanterne" "lanterne|"
+                Just True -> setSession "lanterne" "Lanterne|"
                 _ -> deleteSession "lanterne"
             case masseArmes person of
-                Just True -> setSession "masseArmes" "masseArmes|"
+                Just True -> setSession "masseArmes" "Masse d'armes|"
                 _ -> deleteSession "masseArmes"
             case rationsSpeciales person of
-                Just True -> setSession "rationsSpeciales" "rationsSpeciales|"
+                Just True -> setSession "rationsSpeciales" "Trois rations spéciales|"
                 _ -> deleteSession "rationsSpeciales"
             case grainesFeu person of
-                Just True -> setSession "grainesFeu" "grainesFeu|"
+                Just True -> setSession "grainesFeu" "Trois graines de feu|"
                 _ -> deleteSession "grainesFeu"
             -- sess <- getSession
             redirect $ PageR 1
