@@ -7,30 +7,19 @@
                 <td class="left">
                     <img src="../../static/img/points_endurance.png" />
                 <td class="right">
-                    <span id="pnt_endurance_restante">20/
+                    <span id="pnt_endurance_restante">#{pntEndurance}/
                     <span id="pnt_endurance_total">20
 
             <tr id="pnt_attaque">
                 <td class="left">
                     <img src="../../static/img/points_attaque.png" />
                 <td class="right">
-                    <span id="nb_pnt_attaque">30 
+                    <span id="nb_pnt_attaque">#{pntHabilete} 
             <tr>
                 <td class="left">
                     <img src="../../static/img/pieces_or.png" />
                 <td class="right">
-                    <span id="nb_pieces_or">10
+                    <span id="nb_pieces_or">#{pOr}
                     / 50
         <h3>Disciplines
         <ul id="disciplines">
-
-<p>
-    <a href="#lightbox" class="button">Regarder Sac À Dos
-    
-<div id="lightbox">
-    <section id="sac_a_dos">
-        <a href="#" class="close_msg">
-        <img src="../../static/img/backpack.png"/>
-        <ul>
-        
-<a href="page1.html" id="recommencer" class="button">Recommencer l'histoire

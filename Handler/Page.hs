@@ -1,3 +1,5 @@
+{-# LANGUAGE FlexibleInstances, UndecidableInstances, OverlappingInstances #-}
+
 module Handler.Page where
 
 import Import
@@ -151,9 +153,27 @@ page265 = [whamlet|<section id="story">
 pages :: [Page]
 pages = [Page 1 (toWidget page1), Page 135 (toWidget page135), Page 121 (toWidget page121), Page 158 (toWidget page158), Page 203 (toWidget page203),Page 325 (toWidget page325), Page 265 (toWidget page265)]
 
+class Nothingish a where
+    value :: a
+instance Nothingish (Maybe a) where
+    value = Nothing
+instance Nothingish Text where
+    value = ""
+
+eliminate :: (Nothingish a) => Maybe a -> a
+eliminate (Just a) = a
+eliminate Nothing  = value
+
 getPageR :: Int -> Handler Html
-getPageR pagedId = defaultLayout  $ do
-    toWidget [whamlet|
+getPageR pagedId = do
+    defaultLayout  $ do
+        pointHabilete <- lookupSession "pointHabilete"
+        pointEndurance <- lookupSession "pointEndurance"
+        piecesOr <- lookupSession "piecesOr"
+        let pntHabilete = eliminate pointHabilete
+        let pntEndurance = eliminate pointEndurance
+        let pOr = eliminate piecesOr
+        toWidget [whamlet|
             <header>
                 <nav>
                     <ul>
@@ -164,11 +184,22 @@ getPageR pagedId = defaultLayout  $ do
                         <li>
                             <a id="regleJeu" href=@{ReglesR}>Règle du jeu
                 <img src="../../static/img/castle_death_logo.png" />
-                <p id="pageNumber">#{pagedId}</p>|]
-    findPageText pages pagedId
-    $(widgetFile "defaultPage")
-    $(widgetFile "footer")
-    $(widgetFile "main")
+                <p id="pageNumber">#{pagedId}
+        |]
+        findPageText pages pagedId
+        $(widgetFile "defaultPage")
+        toWidget [whamlet|
+            <p>
+             <a href="#lightbox" class="button">Regarder Sac À Dos
+            <div id="lightbox">
+             <section id="sac_a_dos">
+              <a href="#" class="close_msg">
+              <img src="../../static/img/backpack.png"/>
+              <ul>        
+            <a href="page1.html" id="recommencer" class="button">Recommencer l'histoire
+        |]
+        $(widgetFile "footer")
+        $(widgetFile "main")
 
 
 postPageR :: Int -> Handler Html
