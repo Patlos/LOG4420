@@ -208,64 +208,64 @@ postInitJeuR  = do
             setSession "pointEndurance" $ pointEndurance person
             setSession "piecesOr" $ piecesOr person
             case weaponMastery person of
-                Just True -> setSession "weaponMastery" "yes"
+                Just True -> setSession "weaponMastery" "La science des armes|"
                 _ -> deleteSession "weaponMastery"
             case animalControl person of
-                Just True -> setSession "animalControl" "yes"
+                Just True -> setSession "animalControl" "Contrôle animal|"
                 _ -> deleteSession "animalControl"
             case curing person of
-                Just True -> setSession "curing" "yes"
+                Just True -> setSession "curing" "Science médical|"
                 _ -> deleteSession "curing"
             case invisibility person of
-                Just True -> setSession "invisibility" "yes"
+                Just True -> setSession "invisibility" "Invisibilité|"
                 _ -> deleteSession "invisibility"
             case huntMastery person of
-                Just True -> setSession "huntMastery" "yes"
+                Just True -> setSession "huntMastery" "Art de la chasse|"
                 _ -> deleteSession "huntMastery"
             case pathsmanship person of
-                Just True -> setSession "pathsmanship" "yes"
+                Just True -> setSession "pathsmanship" "Exploration|"
                 _ -> deleteSession "pathsmanship"
             case psiSurge person of
-                Just True -> setSession "psiSurge" "yes"
+                Just True -> setSession "psiSurge" "Foudroiement psychique|"
                 _ -> deleteSession "psiSurge"
             case psiScreen person of
-                Just True -> setSession "psiScreen" "yes"
+                Just True -> setSession "psiScreen" "Écran psychique|"
                 _ -> deleteSession "psiScreen"
             case nexus person of
-                Just True -> setSession "nexus" "yes"
+                Just True -> setSession "nexus" "Nexus|"
                 _ -> deleteSession "nexus"
             case divination person of
-                Just True -> setSession "divination" "yes"
+                Just True -> setSession "divination" "Intuition|"
                 _ -> deleteSession "divination"
             case epee person of
-                Just True -> setSession "epee" "yes"
+                Just True -> setSession "epee" "epee|"
                 _ -> deleteSession "epee"
             case arc person of
-                Just True -> setSession "arc" "yes"
+                Just True -> setSession "arc" "arc|"
                 _ -> deleteSession "arc"
             case carquois person of
-                Just True -> setSession "carquois" "yes"
+                Just True -> setSession "carquois" "carquois|"
                 _ -> deleteSession "carquois"
             case corde person of
-                Just True -> setSession "corde" "yes"
+                Just True -> setSession "corde" "corde|"
                 _ -> deleteSession "corde"
             case potionLaumspur person of
-                Just True -> setSession "potionLaumspur" "yes"
+                Just True -> setSession "potionLaumspur" "potionLaumspur|"
                 _ -> deleteSession "potionLaumspur"
             case poignard person of
-                Just True -> setSession "poignard" "yes"
+                Just True -> setSession "poignard" "poignard|"
                 _ -> deleteSession "poignard"
             case lanterne person of
-                Just True -> setSession "lanterne" "yes"
+                Just True -> setSession "lanterne" "lanterne|"
                 _ -> deleteSession "lanterne"
             case masseArmes person of
-                Just True -> setSession "masseArmes" "yes"
+                Just True -> setSession "masseArmes" "masseArmes|"
                 _ -> deleteSession "masseArmes"
             case rationsSpeciales person of
-                Just True -> setSession "rationsSpeciales" "yes"
+                Just True -> setSession "rationsSpeciales" "rationsSpeciales|"
                 _ -> deleteSession "rationsSpeciales"
             case grainesFeu person of
-                Just True -> setSession "grainesFeu" "yes"
+                Just True -> setSession "grainesFeu" "grainesFeu|"
                 _ -> deleteSession "grainesFeu"
             -- sess <- getSession
             redirect $ PageR 1
