@@ -164,6 +164,10 @@ eliminate :: (Nothingish a) => Maybe a -> a
 eliminate (Just a) = a
 eliminate Nothing  = value
 
+addDisObj:: Maybe Text -> Text -> Text
+addDisObj Nothing a = a
+addDisObj (Just a) b = append b a
+
 getPageR :: Int -> Handler Html
 getPageR pagedId = do
     setSession (pack "LastPage") $ pack (show pagedId)
@@ -176,6 +180,30 @@ getPageR pagedId = do
         let pntHabilete = eliminate pointHabilete
         let pntEndurance = eliminate pointEndurance
         let pOr = eliminate piecesOr
+        weaponMastery <- lookupSession "weaponMastery"
+        animalControl <- lookupSession "animalControl"
+        curing <- lookupSession "curing"
+        invisibility <- lookupSession "invisibility"
+        huntMastery <- lookupSession "huntMastery"
+        pathsmanship <- lookupSession "pathsmanship"
+        psiSurge <- lookupSession "psiSurge"
+        psiScreen <- lookupSession "psiScreen"
+        nexus <- lookupSession "nexus"
+        divination <- lookupSession "divination"
+        let disciplines = addDisObj divination $ addDisObj nexus $ addDisObj psiScreen $ addDisObj psiSurge $ addDisObj pathsmanship $ addDisObj huntMastery $ addDisObj invisibility $ addDisObj curing $ addDisObj animalControl $ addDisObj weaponMastery ""
+        let [dis1,dis2,dis3,videDis] = splitOn (pack "|") disciplines
+        epee <- lookupSession "epee"
+        arc <- lookupSession "arc"
+        carquois <- lookupSession "carquois"
+        corde <- lookupSession "corde"
+        potionLaumspur <- lookupSession "potionLaumspur"
+        poignard <- lookupSession "poignard"
+        lanterne <- lookupSession "lanterne"
+        masseArmes <- lookupSession "masseArmes"
+        rationsSpeciales <- lookupSession "rationsSpeciales"
+        grainesFeu <- lookupSession "grainesFeu"
+        let objets = addDisObj grainesFeu $ addDisObj rationsSpeciales $ addDisObj masseArmes $ addDisObj lanterne $ addDisObj poignard $ addDisObj potionLaumspur $ addDisObj corde $ addDisObj carquois $ addDisObj arc $ addDisObj epee ""
+        let [obj1,obj2,obj3,obj4,obj5,videObj] = splitOn (pack "|") objets
         toWidget [whamlet|
             <header>
                 <nav>

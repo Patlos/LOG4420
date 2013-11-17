@@ -238,7 +238,7 @@ postInitJeuR  = do
                 Just True -> setSession "divination" "Intuition|"
                 _ -> deleteSession "divination"
             case epee person of
-                Just True -> setSession "epee" "Epée|"
+                Just True -> setSession "epee" "Épée|"
                 _ -> deleteSession "epee"
             case arc person of
                 Just True -> setSession "arc" "Arc|"

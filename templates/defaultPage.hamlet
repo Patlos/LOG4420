@@ -24,6 +24,9 @@
                     / 50
         <h3>Disciplines
         <ul id="disciplines">
+            <li>#{dis1}
+            <li>#{dis2}
+            <li>#{dis3}
 
 <p>
     <a href="#lightbox" class="button">Regarder Sac À Dos
@@ -33,5 +36,10 @@
         <a href="#" class="close_msg">
         <img src="../../static/img/backpack.png"/>
         <ul>
+            <li>#{obj1}
+            <li>#{obj2}
+            <li>#{obj3}
+            <li>#{obj4}
+            <li>#{obj5}
 
 <a href=@{PageR 1} id="recommencer" class="button">Recommencer l'histoire
