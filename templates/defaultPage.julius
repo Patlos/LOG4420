@@ -1,0 +1,16 @@
+$(document).ready( function() {
+		if(window.location == "@{PageR 158}"){
+			$("section#decision").css("display", "none");
+			$("section#jeterObjets ~ p").css("display", "none");
+		}
+
+		$("section#jeterObjets button").click( function() {
+				var checkedObjets = $("section#jeterObjets input:checked");
+				if (checkedObjets.length != 2) {
+						alert('Vous devez jeter EXACTEMENT deux objets de votre sac à dos');
+				} else {
+
+				}
+		});
+
+});

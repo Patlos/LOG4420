@@ -66,13 +66,23 @@ page121 = [whamlet|<section id="story">
     <p>Your life and your quest ends here...
     <img id="gameover" src="../../static/img/gameover.jpg" />|]
 
-page158 :: Widget
-page158 = [whamlet|<section id="story">
+page158 :: Text -> Widget
+page158 txt = [whamlet|<section id="story">
     <p>Gasping for air, you claw your way to the surface and swim for the rocky shore. Heaving yourself from the cold water, you crouch down, breathless and exhausted, beside a line of huge boulders, half-buried in the coal-black sand, and take stock of your belongings. You have lost two items from your Backpack, and all the food has been ruined by the tainted water (erase all Meals and two Backpack Items of your choice from your Action Chart).        
     
     <section id="jeterObjets">
         <fieldset>
             <legend>Choisir 2 Items À Jeter...
+            <input type="checkbox">
+            <label>#{txt1}
+            <input type="checkbox">
+            <label>#{txt2}
+            <input type="checkbox">
+            <label>#{txt3}
+            <input type="checkbox">
+            <label>#{txt4}
+            <input type="checkbox">
+            <label>#{txt5}
         <button class="button">Jeter!
 
     <p>No sooner have you managed to control your breathing than you hear the sound of scraping, as if some heavy weight were being dragged across the rocks to your left. A vertical crack appears in the surface of the nearest boulder, and a sickly yellow light washes over you. It is not a boulder—you are staring at a huge eye.
@@ -84,6 +94,12 @@ page158 = [whamlet|<section id="story">
                 <a href="@{PageR 265}">turn to 265.
             <p>If you wish to leap to your feet and escape towards the sheer rock base of Kazan-Oud, 
                 <a href="@{PageR 41}">turn to 41.|]
+    where listTxt = Import.concat[splitOn (pack "|") txt,["","","","",""]]
+          txt1 = listTxt !! 0
+          txt2 = listTxt !! 1
+          txt3 = listTxt !! 2
+          txt4 = listTxt !! 3
+          txt5 = listTxt !! 4
 
 page203 :: Widget
 page203 = [whamlet|<section id="story">
@@ -151,7 +167,7 @@ page265 = [whamlet|<section id="story">
 
 
 pages :: [Page]
-pages = [Page 1 (toWidget page1), Page 135 (toWidget page135), Page 121 (toWidget page121), Page 158 (toWidget page158), Page 203 (toWidget page203),Page 325 (toWidget page325), Page 265 (toWidget page265)]
+pages = [Page 1 (toWidget page1), Page 135 (toWidget page135), Page 121 (toWidget page121), Page 158 (toWidget $ page158 ""), Page 203 (toWidget page203),Page 325 (toWidget page325), Page 265 (toWidget page265)]
 
 class Nothingish a where
     value :: a
@@ -203,7 +219,12 @@ getPageR pagedId = do
         rationsSpeciales <- lookupSession "rationsSpeciales"
         grainesFeu <- lookupSession "grainesFeu"
         let objets = addDisObj grainesFeu $ addDisObj rationsSpeciales $ addDisObj masseArmes $ addDisObj lanterne $ addDisObj poignard $ addDisObj potionLaumspur $ addDisObj corde $ addDisObj carquois $ addDisObj arc $ addDisObj epee ""
-        let [obj1,obj2,obj3,obj4,obj5,videObj] = splitOn (pack "|") objets
+        let objs = Import.concat[splitOn (pack "|") objets,["","","","",""]]
+        let obj1 = objs !! 0
+        let obj2 = objs !! 1
+        let obj3 = objs !! 2
+        let obj4 = objs !! 3
+        let obj5 = objs !! 4
         toWidget [whamlet|
             <header>
                 <nav>
@@ -217,7 +238,9 @@ getPageR pagedId = do
                 <img src="../../static/img/castle_death_logo.png" />
                 <p id="pageNumber">#{pagedId}
         |]
-        findPageText pages pagedId
+        case pagedId of
+            158 -> page158 objets
+            pId -> findPageText pages pId
         $(widgetFile "defaultPage")
         $(widgetFile "footer")
         $(widgetFile "main")
