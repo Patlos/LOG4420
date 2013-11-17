@@ -39,26 +39,52 @@ section#story section#decision {
         border: 5px gray groove;
         border-radius: 20px;
         padding: 20px 20px;
-}
 
-section#story section#decision a {
-        text-decoration: none;
-        color: green;
-        font-weight: bold;
-}
+     a {
+            text-decoration: none;
+            color: green;
+            font-weight: bold;
+    }
 
-section#story section#decision img {
+    img {
         width: 172px;
         height: 132px;
         display: inline-block;
         margin-right: 30px;
-}
+    }
 
-section#story section#decision div {
+    div {
         display: inline-block;
         vertical-align: top;
         width: 280px;
+    }
 }
+
+section#story section#decisionCombat {
+        border: 5px gray groove;
+        border-radius: 20px;
+        padding: 20px 20px;
+
+     a {
+            text-decoration: none;
+            color: green;
+            font-weight: bold;
+    }
+
+    img {
+        width: 172px;
+        height: 132px;
+        display: inline-block;
+        margin-right: 30px;
+    }
+
+    div {
+        display: inline-block;
+        vertical-align: top;
+        width: 280px;
+    }
+}
+
 
 section#story img.monster {
         width: 200px;
@@ -283,6 +309,16 @@ section#story section#decision img {
 }
 
 section#story section#decision div {
+        display: block;
+        margin: 0 auto;
+}
+
+section#story section#decisionCombat img {
+        display: block;
+        margin: 0 auto;
+}
+
+section#story section#decisionCombat div {
         display: block;
         margin: 0 auto;
 }

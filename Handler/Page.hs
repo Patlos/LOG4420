@@ -108,23 +108,23 @@ page325 = [whamlet|<section id="story">
 
             <p>Fight the combat as normal. However, due to your lack of air, you must automatically deduct 2 ENDURANCE points for every round that you fight.
 
-    <section id="combat">
-        <p id="monster_name">
-            <strong>Black Lakeweed: #
-            COMBAT SKILL 
-            <span id="pnt_attaque_monstre">10 #    
-            ENDURANCE 
-            <span id="pnt_endurance_monstre">50
+            <section id="combat">
+                <p id="monster_name">
+                    <strong>Black Lakeweed:
+                    COMBAT SKILL
+                    <span id="pnt_attaque_monstre">10 
+                    ENDURANCE 
+                    <span id="pnt_endurance_monstre">50
 
-    <section class="choixCombat">
-        <button id="combattre" class="button">COMBATTRE
-        <button id="fuir" class="button">FUIR
+                <section class="choixCombat">
+                        <button id="combattre" class="button">COMBATTRE
+                        <button id="fuir" class="button">fuir
 
-    <section id="decision">
-        <img src="../../static/img/decision.png" />
-        <div>
-            <p>If you survive the struggle, 
-                <a href="@{PageR 76}">turn to 158.|]
+            <section id="decisionCombat">
+                <img src="../../static/img/decision.png" />
+                <div>
+                    <p>If you survive the struggle, 
+                        <a href="@{PageR 158}">turn to 158.|]
 
 page265 :: Widget
 page265 = [whamlet|<section id="story">
@@ -169,6 +169,7 @@ getPageR pagedId = do
     setSession (pack "LastPage") $ pack (show pagedId)
     defaultLayout  $ do
         setTitle "Castle Death"
+        addScriptRemote "//code.jquery.com/jquery-1.10.1.js"
         pointHabilete <- lookupSession "pointHabilete"
         pointEndurance <- lookupSession "pointEndurance"
         piecesOr <- lookupSession "piecesOr"
@@ -192,6 +193,7 @@ getPageR pagedId = do
         $(widgetFile "defaultPage")
         $(widgetFile "footer")
         $(widgetFile "main")
+        $(widgetFile "combat")
 
 
 postPageR :: Int -> Handler Html

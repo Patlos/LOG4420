@@ -10,13 +10,9 @@ import Import
 -- The majority of the code you will write in Yesod lives in these handler
 -- functions. You can spread them across multiple files if you are so
 -- inclined, or create a single monolithic file.
-getHomeR :: Handler Html
-getHomeR = defaultLayout $ do
-        setTitle "Castle Death"
-        $(widgetFile "navigation")
-        $(widgetFile "accueil")
-        $(widgetFile "footer")
-        $(widgetFile "main")
+getHomeR :: Handler ()
+getHomeR = redirect AccueilR
+
 
 
 --postHomeR :: Handler Html

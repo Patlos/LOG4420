@@ -7,7 +7,8 @@
                 <td class="left">
                     <img src="../../static/img/points_endurance.png" />
                 <td class="right">
-                    <span id="pnt_endurance_restante">#{pntEndurance}/
+                    <span id="pnt_endurance_restante">#{pntEndurance}
+                    /
                     <span id="pnt_endurance_total">20
 
             <tr id="pnt_attaque">
@@ -33,4 +34,4 @@
         <img src="../../static/img/backpack.png"/>
         <ul>
 
-<a href="page1.html" id="recommencer" class="button">Recommencer l'histoire
+<a href=@{PageR 1} id="recommencer" class="button">Recommencer l'histoire

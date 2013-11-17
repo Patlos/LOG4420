@@ -189,10 +189,15 @@ getInitJeuR = do
         Just page -> defaultLayout $ do
           $(widgetFile "main")
           toWidget[lucius| p {text-align: center; }
-            .button{ margin-top:5px;}|]
-          [whamlet|<p>Voulez-vous continuer la partie existante?
-            <a href=@{PageR $ read $ unpack page} class="button"> Oui
-            <a href=@{ClearSessionR} class="button"> Non|]
+            .button { margin-top:5px;}
+            img { display: block;
+                  margin-left: auto;
+                  margin-right: auto;}|]
+          [whamlet|
+          <p>Voulez-vous continuer la partie existante?
+          <img src="../../static/img/surrender.jpg" />
+          <a href=@{PageR $ read $ unpack page} class="button"> Oui
+          <a href=@{ClearSessionR} class="button"> Non|]
 
 postInitJeuR :: Handler Html
 postInitJeuR  = do
