@@ -1,6 +1,7 @@
 ﻿module Handler.InitJeu where
 
 import Import
+import Data.Text
 
 data Person = Person
     {pointHabilete    :: Text
@@ -173,17 +174,25 @@ personForm extra = do
 
 getInitJeuR :: Handler Html
 getInitJeuR = do
-    ((res, widget), enctype) <- runFormGet personForm
-    defaultLayout $ do
-        setTitle "Castle Death"
-        addScriptRemote "//code.jquery.com/jquery-1.10.1.js"
-        toWidget [julius|
-            $("#jeu").addClass("current");
-        |]
-        $(widgetFile "navigation")
-        $(widgetFile "personCreation")
-        $(widgetFile "footer")
-        $(widgetFile "main")
+    lastpage <- lookupSession "LastPage"
+    case lastpage of
+        Nothing -> do
+            ((res, widget), enctype) <- runFormGet personForm
+            defaultLayout $ do
+              setTitle "Castle Death"
+              addScriptRemote "//code.jquery.com/jquery-1.10.1.js"
+              toWidget [julius|$("#jeu").addClass("current");|]
+              $(widgetFile "navigation")
+              $(widgetFile "personCreation")
+              $(widgetFile "footer")
+              $(widgetFile "main")
+        Just page -> defaultLayout $ do
+          $(widgetFile "main")
+          toWidget[lucius| p {text-align: center; }
+            .button{ margin-top:5px;}|]
+          [whamlet|<p>Voulez-vous continuer la partie existante?
+            <a href=@{PageR $ read $ unpack page} class="button"> Oui
+            <a href=@{ClearSessionR} class="button"> Non|]
 
 postInitJeuR :: Handler Html
 postInitJeuR  = do

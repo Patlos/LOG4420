@@ -8,5 +8,5 @@
 livreJeu/initJeu InitJeuR GET POST
 livreJeu/accueil AccueilR GET
 livreJeu/regles ReglesR GET
-/livreJeu/page/#Int PageR GET POST
-
+livreJeu/page/#Int PageR GET POST
+livreJeu/ClearSession ClearSessionR GET

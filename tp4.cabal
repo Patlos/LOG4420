@@ -24,6 +24,7 @@ library
                      Handler.Accueil
                      Handler.Regles
                      Handler.Page
+                     Handler.ClearSession
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT

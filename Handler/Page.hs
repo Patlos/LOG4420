@@ -1,6 +1,7 @@
 module Handler.Page where
 
 import Import
+import Data.Text
 
 data Page = Page Int Widget
 
@@ -151,8 +152,10 @@ page265 = [whamlet|<section id="story">
 pages :: [Page]
 pages = [Page 1 (toWidget page1), Page 135 (toWidget page135), Page 121 (toWidget page121), Page 158 (toWidget page158), Page 203 (toWidget page203),Page 325 (toWidget page325), Page 265 (toWidget page265)]
 
+
 getPageR :: Int -> Handler Html
 getPageR pagedId = defaultLayout  $ do
+    setSession (pack "LastPage") $ pack (show pagedId)
     toWidget [whamlet|
             <header>
                 <nav>
