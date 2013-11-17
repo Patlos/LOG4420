@@ -71,19 +71,21 @@ page158 txt = [whamlet|<section id="story">
     <p>Gasping for air, you claw your way to the surface and swim for the rocky shore. Heaving yourself from the cold water, you crouch down, breathless and exhausted, beside a line of huge boulders, half-buried in the coal-black sand, and take stock of your belongings. You have lost two items from your Backpack, and all the food has been ruined by the tainted water (erase all Meals and two Backpack Items of your choice from your Action Chart).        
     
     <section id="jeterObjets">
-        <fieldset>
-            <legend>Choisir 2 Items À Jeter...
-            <input type="checkbox">
-            <label>#{txt1}
-            <input type="checkbox">
-            <label>#{txt2}
-            <input type="checkbox">
-            <label>#{txt3}
-            <input type="checkbox">
-            <label>#{txt4}
-            <input type="checkbox">
-            <label>#{txt5}
-        <button class="button">Jeter!
+        <form method="post" action=@{JeterObjetsR}>
+            <fieldset>
+                <legend>Choisir 2 Items À Jeter...
+                <input type="checkbox">
+                <label>#{txt1}
+                <input type="checkbox">
+                <label>#{txt2}
+                <input type="checkbox">
+                <label>#{txt3}
+                <input type="checkbox">
+                <label>#{txt4}
+                <input type="checkbox">
+                <label>#{txt5}
+                <input type="hidden" name="keys" id="keys" value="xxx">
+            <input type="submit" class="button" value="Jeter!">
 
     <p>No sooner have you managed to control your breathing than you hear the sound of scraping, as if some heavy weight were being dragged across the rocks to your left. A vertical crack appears in the surface of the nearest boulder, and a sickly yellow light washes over you. It is not a boulder—you are staring at a huge eye.
 

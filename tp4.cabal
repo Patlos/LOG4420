@@ -25,6 +25,7 @@ library
                      Handler.Regles
                      Handler.Page
                      Handler.ClearSession
+                     Handler.JeterObjets
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
