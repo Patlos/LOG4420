@@ -167,9 +167,29 @@ page265 = [whamlet|<section id="story">
             <p>If you do not possess this skill, or if you do not wish to use it, 
                 <a href="@{PageR 121}">turn to 121.|]
 
+page288 :: Widget
+page288 = [whamlet|<section id="story">
+    <p>Vivid green flashes of forked lightning and the rumble of distant thunder add menace to the towers and sheer stone walls of Kazan-Oud. Many of the roofs and turrets are in ruin; their twisted beams and floors lie open to the sky, giving the fortress a burnt-out and deserted appearance.
+
+    <p>As you approach the tiny bay, which is tucked inside the shelter of a horseshoe reef of jagged black rocks, your eye is caught by the glow of tiny red lights, moving in the shadows at the base of the fortress wall. You notice a dry hollow among a group of rocks close to the shore that offers an ideal hiding place for your little boat. Silently, you disembark and drag the coracle up the beach towards the rocks. Seconds later you are halted dead in your tracks by the sound of muffled squealing. Sweat breaks out on your brow when a flash of lightning reveals scores of small red eyes close to the sand. A seething flood of rats, each as large as a puppy but gaunt and half-starved, is scurrying down the beach towards you like a torrent of black water.
+
+    <p>With pounding heart, you search for some means of escape from this ravenous horde of squealing, snapping rodents.
+
+    <section id="decision">
+        <img src="../../static/img/decision.png" />
+        <div>
+            <p>If you wish to climb over the rocks and escape across a deserted beach, 
+                <a href="@{PageR 336}">turn to 336.
+            
+            <p>If you wish to drag your little boat back into the lake and paddle away from the bay,
+                <a href="@{PageR 117}">turn to 117.
+            
+            <p>If you prefer to stand and fight the onrushing flood of giant rats, 
+                <a href="@{PageR 45}">turn to 45.|]    
+
 
 pages :: [Page]
-pages = [Page 1 (toWidget page1), Page 135 (toWidget page135), Page 121 (toWidget page121), Page 158 (toWidget $ page158 ""), Page 203 (toWidget page203),Page 325 (toWidget page325), Page 265 (toWidget page265)]
+pages = [Page 1 (toWidget page1), Page 135 (toWidget page135), Page 121 (toWidget page121), Page 158 (toWidget $ page158 ""), Page 203 (toWidget page203),Page 325 (toWidget page325), Page 265 (toWidget page265), Page 288 (toWidget page288) ]
 
 class Nothingish a where
     value :: a
