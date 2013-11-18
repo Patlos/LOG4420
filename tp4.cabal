@@ -26,6 +26,7 @@ library
                      Handler.Page
                      Handler.ClearSession
                      Handler.JeterObjets
+                     Handler.PerdrePoint
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT

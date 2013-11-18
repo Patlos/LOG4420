@@ -1,28 +1,45 @@
 $(document).ready( function() {
-		if(window.location == "@{PageR 158}"){
-			//$("section#decision").css("display", "none");
-			//$("section#jeterObjets ~ p").css("display", "none");
-			$("section#jeterObjets form fieldset label").each(function(){
-				if($(this).text()==""){
-					$(this).prev().remove();
-					$(this).remove();
-				}
-			});
-		
-			$('section#jeterObjets form').submit( function(e){
-				var checkedObjets = $("section#jeterObjets input:checked");
-				if (checkedObjets.length != 2) {
-					alert('Vous devez jeter EXACTEMENT deux objets de votre sac à dos');
-					return false;
-				} else {
-					var keys = "";
-					checkedObjets.each(function(){
-						keys = keys + $(this).next().text()+"|";
-					});
-					$("input#keys").val(keys);
-					return true;
-				}
-			});
+		if(window.location == "@{PageR 265}"){
+			$("section#decision").css("display", "none");
+			$("section#jeterObjets ~ p").css("display", "none");
 		}
+		
+		$("section#jeterObjets form fieldset label").each(function(){
+			if($(this).text()==""){
+				$(this).prev().remove();
+				$(this).remove();
+			}
+		});
+	
+		$('section#jeterObjets form').submit( function(e){
+			var checkedObjets = $("section#jeterObjets input:checked");
+			if (checkedObjets.length != 2) {
+				alert('Vous devez jeter EXACTEMENT deux objets de votre sac à dos');
+				return false;
+			} else {
+				var keys = "";
+				checkedObjets.each(function(){
+					keys = keys + $(this).next().text()+"|";
+				});
+				$("input#keys").val(keys);
+				return true;
+			}
+		});
+
+
+		$("button#confirmLossPnt").click (function() {
+			var lifePoints = $("section#stats #pnt_endurance_restante");
+			var lifeLoss = $("section#story p.situation #lifeLost").text();
+			lifePoints.text(lifePoints.text() - lifeLoss);
+			$(this).css("display", "none");
+			$("section#story p.situation ~ p").css("display", "block");
+			$("section#decision").css("display", "block");
+		});
+		
+		$("section#decision button").click( function() {
+			var pageToGo = $(this).attr("id").substring(1);
+			$("input#pageToGo").val(pageToGo);
+			$("form#lossPnt").submit();
+		});
 
 });
