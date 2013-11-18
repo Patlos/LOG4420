@@ -5,6 +5,7 @@ import Data.Text
 
 data Objects = Objects
     { keys :: Text
+    , pageToGo :: Text
     }
     deriving Show
 
@@ -12,6 +13,7 @@ postJeterObjetsR :: Handler Html
 postJeterObjetsR = do
     objects <- runInputPost $ Objects
                 <$> ireq hiddenField "keys"
+                <*> ireq hiddenField "pageToGo"
     let [obj1,obj2,videObj] = splitOn (pack "|") $ keys objects
     case obj1 of
         "Épée" -> deleteSession "epee"
@@ -35,4 +37,5 @@ postJeterObjetsR = do
         "Masse d'armes" -> deleteSession "masseArmes"
         "Trois rations spéciales" -> deleteSession "rationsSpeciales"
         "Trois graines de feu" -> deleteSession "grainesFeu"
-    redirect $ PageR 158
+    let page = read $ unpack $ pageToGo objects
+    redirect $ PageR page

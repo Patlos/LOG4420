@@ -1,5 +1,7 @@
 $(document).ready( function() {
-		if(window.location == "@{PageR 265}"){
+		var page158 = "@{PageR 158}";
+		var page265 = "@{PageR 265}";
+		if(window.location.href.indexOf(page158)!= -1|| window.location.href.indexOf(page265)!= -1){
 			$("section#decision").css("display", "none");
 			$("section#jeterObjets ~ p").css("display", "none");
 		}
@@ -8,22 +10,97 @@ $(document).ready( function() {
 			if($(this).text()==""){
 				$(this).prev().remove();
 				$(this).remove();
+			}else{
+				switch ($(this).text()){
+					case "Épée":
+						$(this).prev().attr("name","epee");
+						break;
+					case "Arc":
+						$(this).prev().attr("name","arc");
+						break;
+					case "Carquois":
+						$(this).prev().attr("name","carquois");
+						break;
+					case "Corde":
+						$(this).prev().attr("name","corde");
+						break;
+					case "Potion de Laumspur":
+						$(this).prev().attr("name","potionLaumspur");
+						break;
+					case "Poignard":
+						$(this).prev().attr("name","poignard");
+						break;
+					case "Lanterne":
+						$(this).prev().attr("name","lanterne");
+						break;
+					case "Masse d'armes":
+						$(this).prev().attr("name","masseArmes");
+						break;
+					case "Trois rations spéciales":
+						$(this).prev().attr("name","rationsSpeciales");
+						break;
+					case "Trois graines de feu":
+						$(this).prev().attr("name","grainesFeu");
+						break;
+				}
 			}
 		});
-	
-		$('section#jeterObjets form').submit( function(e){
-			var checkedObjets = $("section#jeterObjets input:checked");
-			if (checkedObjets.length != 2) {
-				alert('Vous devez jeter EXACTEMENT deux objets de votre sac à dos');
-				return false;
-			} else {
-				var keys = "";
-				checkedObjets.each(function(){
-					keys = keys + $(this).next().text()+"|";
-				});
-				$("input#keys").val(keys);
-				return true;
+		
+		$("section#sac_a_dos li").each(function(){
+			switch ($(this).text()){
+				case "Épée":
+					$(this).attr("name","epee");
+					break;
+				case "Arc":
+					$(this).attr("name","arc");
+					break;
+				case "Carquois":
+					$(this).attr("name","carquois");
+					break;
+				case "Corde":
+					$(this).attr("name","corde");
+					break;
+				case "Potion de Laumspur":
+					$(this).attr("name","potionLaumspur");
+					break;
+				case "Poignard":
+					$(this).attr("name","poignard");
+					break;
+				case "Lanterne":
+					$(this).attr("name","lanterne");
+					break;
+				case "Masse d'armes":
+					$(this).attr("name","masseArmes");
+					break;
+				case "Trois rations spéciales":
+					$(this).attr("name","rationsSpeciales");
+					break;
+				case "Trois graines de feu":
+					$(this).attr("name","grainesFeu");
+					break;
 			}
+		});
+
+		$("section#jeterObjets button").click( function() {
+				var checkedObjets = $("section#jeterObjets input:checked");
+				if (checkedObjets.length != 2) {
+						alert('Vous devez jeter EXACTEMENT deux objets de votre sac à dos');
+				} else {
+						jQuery.each(checkedObjets, function() {
+								var checkedObjectName = this.name;
+								$('section#sac_a_dos li[name="' + checkedObjectName + '"]').remove();
+						});
+
+						$("section#decision").css("display", "block");
+						$("section#jeterObjets ~ p").css("display", "block");
+						$("section#jeterObjets button").css("display", "none");
+						
+						var keys = "";
+						checkedObjets.each(function(){
+							keys = keys + $(this).next().text()+"|";
+						});
+						$("input#keys").val(keys);
+				}
 		});
 
 
@@ -39,7 +116,12 @@ $(document).ready( function() {
 		$("section#decision button").click( function() {
 			var pageToGo = $(this).attr("id").substring(1);
 			$("input#pageToGo").val(pageToGo);
-			$("form#lossPnt").submit();
+			if(window.location.href.indexOf(page158)!= -1){
+				$("section#jeterObjets form").submit();
+			}
+			if(window.location.href.indexOf(page265)!= -1){
+				$("form#lossPnt").submit();
+			}
 		});
 
 });

@@ -85,7 +85,8 @@ page158 txt = [whamlet|<section id="story">
                 <input type="checkbox">
                 <label>#{txt5}
                 <input type="hidden" name="keys" id="keys" value="">
-            <input type="submit" class="button" value="Jeter!">
+                <input type="hidden" name="pageToGo" id="pageToGo" value="">
+        <button class="button">Jeter!
 
     <p>No sooner have you managed to control your breathing than you hear the sound of scraping, as if some heavy weight were being dragged across the rocks to your left. A vertical crack appears in the surface of the nearest boulder, and a sickly yellow light washes over you. It is not a boulder—you are staring at a huge eye.
 
@@ -93,9 +94,9 @@ page158 txt = [whamlet|<section id="story">
         <img src="../../static/img/decision.png" />
         <div>
             <p>If you wish to draw your weapon and attack the eye, 
-                <a href="@{PageR 265}">turn to 265.
+                <button class="btnLikeLink" id="P265">turn to 265.
             <p>If you wish to leap to your feet and escape towards the sheer rock base of Kazan-Oud, 
-                <a href="@{PageR 41}">turn to 41.|]
+                <button class="btnLikeLink" id="P41">turn to 41.|]
     where listTxt = Import.concat[splitOn (pack "|") txt,["","","","",""]]
           txt1 = listTxt !! 0
           txt2 = listTxt !! 1
