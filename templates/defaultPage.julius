@@ -173,6 +173,11 @@ $(document).ready( function() {
 				var linkWithSkill = $("section#decision p i + a");
 				linkWithSkill.removeAttr('href');
 				linkWithSkill.css("color", "gray");
+				$("section#decision p i").each(function(){
+					if($(this).attr("name")!= undefined){
+						$(this).parent().children("button.btnLikeLink").attr("disabled","disabled");
+					}
+				});
 		}
 
 });
