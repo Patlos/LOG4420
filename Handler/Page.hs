@@ -138,12 +138,15 @@ page325 = [whamlet|<section id="story">
                 <section class="choixCombat">
                         <button id="combattre" class="button">COMBATTRE
                         <button id="fuir" class="button">fuir
+                <form method="post" id="lossPnt" action=@{PerdrePointR}>
+                    <input type="hidden" name="pntToLose" id="pntToLose" value=0>
+                    <input type="hidden" name="pageToGo" id="pageToGo" value=158>
 
             <section id="decisionCombat">
                 <img src="../../static/img/decision.png" />
                 <div>
                     <p>If you survive the struggle, 
-                        <a href="@{PageR 158}">turn to 158.|]
+                        <button class="btnLikeLink" id="P158">turn to 158.|]
 
 page265 :: Widget
 page265 = [whamlet|<section id="story">
@@ -193,7 +196,7 @@ page288 = [whamlet|<section id="story">
 
 
 pages :: [Page]
-pages = [Page 1 (toWidget page1), Page 135 (toWidget page135), Page 121 (toWidget page121), Page 158 (toWidget $ page158 ""), Page 203 (toWidget page203),Page 325 (toWidget page325), Page 265 (toWidget page265), Page 288 (toWidget page288) ]
+pages = [Page 1 (toWidget page1), Page 135 (toWidget page135), Page 121 (toWidget page121), Page 158 (toWidget $ page158 ""), Page 203 (toWidget page203),Page 325 (toWidget page325), Page 265 (toWidget page265), Page 288 (toWidget page288)]
 
 class Nothingish a where
     value :: a

@@ -30,6 +30,10 @@ $(document).ready( function() {
 				var hitOnMonster = table[nb_aleatoire][quotient_attaque_index][0];
 
 				endurance_restante_joueur = endurance_restante_joueur - hitOnPlayer;
+
+				var TotalHits = Number($("#pntToLose").val()) + hitOnPlayer;
+				$("#pntToLose").val(TotalHits);
+
 				if (endurance_restante_joueur < 0) {
 						endurance_restante_joueur = 0;
 				}
@@ -64,8 +68,8 @@ $(document).ready( function() {
 					$("section#decisionCombat").css("display", "block");
 		});
 
-		$("section#decisionCombat a").click( function() {
-				localStorage["pnt_endurance"] = $("#pnt_endurance_restante").text();
+		$("section#decisionCombat button").click( function() {
+				$("form#lossPnt").submit();
 		});
 });
 
