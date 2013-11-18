@@ -84,7 +84,7 @@ page158 txt = [whamlet|<section id="story">
                 <label>#{txt4}
                 <input type="checkbox">
                 <label>#{txt5}
-                <input type="hidden" name="keys" id="keys" value="xxx">
+                <input type="hidden" name="keys" id="keys" value="">
             <input type="submit" class="button" value="Jeter!">
 
     <p>No sooner have you managed to control your breathing than you hear the sound of scraping, as if some heavy weight were being dragged across the rocks to your left. A vertical crack appears in the surface of the nearest boulder, and a sickly yellow light washes over you. It is not a boulder—you are staring at a huge eye.
@@ -153,6 +153,9 @@ page265 = [whamlet|<section id="story">
         <span id="lifeLost">2 #
         ENDURANCE points).
         <button id="confirmLossPnt" class="button">Confirmer
+    <form method="post" id="lossPnt" action=@{PerdrePointR}>
+        <input type="hidden" name="pntToLose" id="pntToLose" value="2">
+        <input type="hidden" name="pageToGo" id="pageToGo" value="">
 
     <p>Before you can rise, a warty, green tentacle coils round your waist and pulls you slowly towards the mutilated eye.
 
@@ -162,10 +165,10 @@ page265 = [whamlet|<section id="story">
             <p>If you have the 
                 <i name="psiSurge">Magnakai Discipline of Psi-surge #
                 and wish to use it, 
-                <a href="@{PageR 190}">turn to 190.
+                <button class="btnLikeLink" id="P190">turn to 190.
 
             <p>If you do not possess this skill, or if you do not wish to use it, 
-                <a href="@{PageR 121}">turn to 121.|]
+                <button class="btnLikeLink" id="P121">turn to 121.|]
 
 page288 :: Widget
 page288 = [whamlet|<section id="story">

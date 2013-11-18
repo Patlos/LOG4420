@@ -11,3 +11,4 @@ livreJeu/regles ReglesR GET
 livreJeu/page/#Int PageR GET POST
 livreJeu/ClearSession ClearSessionR GET
 livreJeu/jeterObjets JeterObjetsR POST
+livreJeu/perdrePoint PerdrePointR POST
