@@ -46,6 +46,41 @@ $(document).ready( function() {
 			}
 		});
 		
+		$("ul#disciplines li").each(function(){
+			switch ($(this).text()){
+				case "La science des armes":
+					$(this).attr("name","weaponMastery");
+					break;
+				case "Contrôle animal":
+					$(this).attr("name","animalControl");
+					break;
+				case "Science médical":
+					$(this).attr("name","curing");
+					break;
+				case "Invisibilité":
+					$(this).attr("name","invisibility");
+					break;
+				case "Art de la chasse":
+					$(this).attr("name","huntMastery");
+					break;
+				case "Exploration":
+					$(this).attr("name","pathsmanship");
+					break;
+				case "Foudroiement psychique":
+					$(this).attr("name","psiSurge");
+					break;
+				case "Écran psychique":
+					$(this).attr("name","psiScreen");
+					break;
+				case "Nexus":
+					$(this).attr("name","nexus");
+					break;
+				case "Intuition":
+					$(this).attr("name","divination");
+					break;
+			}
+		});
+		
 		$("section#sac_a_dos li").each(function(){
 			switch ($(this).text()){
 				case "Épée":
@@ -123,5 +158,21 @@ $(document).ready( function() {
 				$("form#lossPnt").submit();
 			}
 		});
+		
+		var requiredSkill = $("section#decision p i");
+		var disciplines = $("section#stats ul#disciplines li");
+
+		hasDiscipline = false;
+		for (i = 0; i < disciplines.length; i++) {
+				if ($(disciplines[i]).attr('name') == requiredSkill.attr('name')) {
+					hasDiscipline = true;
+				}
+		}
+
+		if (!hasDiscipline) {
+				var linkWithSkill = $("section#decision p i + a");
+				linkWithSkill.removeAttr('href');
+				linkWithSkill.css("color", "gray");
+		}
 
 });
