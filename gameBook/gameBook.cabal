@@ -26,6 +26,7 @@ library
                      Handler.Forms
                      Handler.Blog
                      Handler.Article
+                     Handler.Service
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT

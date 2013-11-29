@@ -11,3 +11,4 @@
 
 /blog BlogR GET POST
 /blog/#ArticleId ArticleR GET
+/service/#Int ServiceR GET
