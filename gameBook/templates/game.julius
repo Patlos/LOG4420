@@ -67,3 +67,271 @@
 
          };
 
+var currentCharacter = null;
+
+// make fight result function
+// @param[in]   Int e: enemy damage
+// @param[in]   Int l: lonewolf damage
+function mfr(e, l) { return function (context) { context.characterDmg = l; context.monsterDmg = e; }; };
+// make fight result function for automatic death of lonewolf
+var mfrdl = function (context) { context.characterDmg = context.character.healthPoints; context.monsterDmg = 0; };
+// make fight result function for automatic death of the enemy
+var mfrde = function (context) { context.characterDmg = 0; context.monsterDmg = context.monster.healthPoints; };
+
+// fight table for the game, do not attempt to read,
+// relation between index and combat ratio :    if CR>=0      Math.Ceil(CR/2)+6      else     Math.Floor(CR/2)+6
+// if CR < -11 then CR = -11    && if CR > 11 then CR = 11
+var FightTable = [
+[mfr(6, 0), mfrdl, mfrdl, mfr(0, 8), mfr(0, 8), mfr(1, 7), mfr(2, 6), mfr(3, 5), mfr(4, 4), mfr(5, 3), ],              // index 0, Combat Ratio -11 or less
+[mfr(7, 0), mfrdl, mfr(0, 8), mfr(0, 7), mfr(1, 7), mfr(2, 6), mfr(3, 6), mfr(4, 5), mfr(5, 4), mfr(6, 3), ],          // index 1, Combat Ratio -10 & -9
+[mfr(8, 0), mfr(0, 8), mfr(0, 7), mfr(1, 6), mfr(2, 6), mfr(3, 5), mfr(4, 5), mfr(5, 4), mfr(6, 3), mfr(7, 2), ],      // index 2, Combat Ratio -8 & -7
+[mfr(9, 0), mfr(0, 6), mfr(1, 6), mfr(2, 5), mfr(3, 5), mfr(4, 4), mfr(5, 4), mfr(6, 3), mfr(7, 2), mfr(8, 0), ],      // index 3, Combat Ratio -6 & -5
+[mfr(10, 0), mfr(1, 6), mfr(2, 5), mfr(3, 5), mfr(4, 4), mfr(5, 4), mfr(6, 3), mfr(7, 2), mfr(8, 1), mfr(9, 0), ],     // index 4, Combat Ratio -3 & -4
+[mfr(11, 0), mfr(2, 5), mfr(3, 5), mfr(4, 4), mfr(5, 4), mfr(6, 3), mfr(7, 2), mfr(8, 2), mfr(9, 1), mfr(10, 0), ],    // index 5, Combat Ratio -1 & -2
+[mfr(12, 0), mfr(3, 5), mfr(4, 4), mfr(5, 4), mfr(6, 3), mfr(7, 2), mfr(8, 2), mfr(9, 1), mfr(10, 0), mfr(11, 0), ],   // index 6, Combat Ratio 0
+[mfr(14, 0), mfr(4, 5), mfr(5, 4), mfr(6, 3), mfr(7, 3), mfr(8, 2), mfr(9, 2), mfr(10, 1), mfr(11, 0), mfr(12, 0), ],  // index 7, Combat Ratio 1 & 2
+[mfr(16, 0), mfr(5, 4), mfr(6, 3), mfr(7, 3), mfr(8, 2), mfr(9, 2), mfr(10, 2), mfr(11, 1), mfr(12, 0), mfr(14, 0), ], // index 8, Combat Ratio 3 & 4
+[mfr(18, 0), mfr(6, 4), mfr(7, 3), mfr(8, 3), mfr(9, 2), mfr(10, 2), mfr(11, 1), mfr(12, 0), mfr(14, 0), mfr(16, 0), ],// index 9, Combat Ratio 5 & 6
+[mfrde, mfr(7, 4), mfr(8, 3), mfr(9, 2), mfr(10, 2), mfr(11, 2), mfr(12, 1), mfr(14, 0), mfr(16, 0), mfr(18, 0), ],    // index 10, Combat Ratio 7 & 8
+[mfrde, mfr(8, 3), mfr(9, 3), mfr(10, 2), mfr(11, 2), mfr(12, 2), mfr(14, 1), mfr(16, 0), mfr(18, 0), mfrde, ],        // index 11, Combat Ratio 9 & 10
+[mfrde, mfr(9, 3), mfr(10, 2), mfr(11, 2), mfr(12, 2), mfr(14, 1), mfr(16, 1), mfr(18, 0), mfrde, mfrde, ],            // index 12, Combat Ratio 11 and more
+];
+
+function initFightSection() {
+    // Si un combat se trouve dans la page.
+    if ( $("#combat").size() ) {
+
+        fightContext = new FightContext();
+
+        $("#combattre").click(function () {
+
+            fightContext.fightRound();
+
+        });
+
+        $("#fuir").click(function () {
+            if (fightContext.canRun) {
+                fightContext.runFight();
+            }
+        });
+    }
+}
+
+function FightContext() {
+
+    // Initialisation du contexte
+    this.round = 1;
+
+    this.randomNum = 0;
+
+    var monsterName = $("#monster_name strong").text();
+    var monsterHealth = $("#pnt_endurance_monstre").text();
+    var monsterSkill = $("#pnt_attaque_monstre").text();
+
+    this.monster = new Monster(monsterName, parseInt(monsterHealth), parseInt(monsterSkill));
+    this.character = new Character("", #{toJSON $ pntHabilete person}, #{toJSON $ pntEndurance person}, #{toJSON $ piecesOr person}, #{toJSON $ disciplines person}, #{toJSON $ items person});
+
+    this.combatRatio = this.character.skillPoints - this.monster.skillPoints;
+
+    this.canRun = false;
+
+    //Set page for combat
+    $("section#decision").hide();
+    $("section#combat ~ p").hide();
+
+    this.fightRound = function() {
+        this.randomNum = Math.floor((Math.random()*10));
+
+        var CR = this.combatRatio;
+
+        if (CR < -11) {
+            CR = -11;
+        } else if (CR > 11) {
+            CR = 11;
+        }
+
+        if (CR >= 0) {
+            var iTable = Math.ceil(CR / 2) + 6;
+        } else {
+            var iTable = Math.floor(CR / 2) + 6;
+        }
+
+        FightTable[iTable][this.randomNum](this);
+
+        this.character.healthPoints = this.character.healthPoints - this.characterDmg;
+        this.monster.healthPoints = this.monster.healthPoints - this.monsterDmg;
+
+        this.updateUI();
+
+        // Game Over
+        if (this.character.healthPoints <= 0) {
+            this.character.healthPoints = 0;
+            this.loseFight();
+        }
+
+        if (this.monster.healthPoints <= 0) {
+            this.monster.healthPoints = 0;
+
+            // prevent double death, player death is more important than winning fight of course
+            if (this.character.healthPoints != 0) {
+                this.winFight();
+            }
+        }
+
+        this.round++;
+        this.canRun = true;
+    }
+
+    this.updateUI = function() {
+        var section = '<section><h3>Ronde combat: <span>' + this.round + '</span></h3><p>Ratio de combat: ' + this.combatRatio + "<br/>Chiffre aléatoire: " + this.randomNum + "</p><p>Ton enemi a obtenu <i>" + this.monsterDmg + "</i> dégâts -<br/>et a maintenant <i>" + this.monster.healthPoints + "</i> points d'endurance.</p><p>Lone Wolf a eu <i>" + this.characterDmg + "</i> dégâts -<br/>et a maintenant <i>" + this.character.healthPoints + "</i> points d'endurance.</p></section>";
+        
+        $("#combat .choixCombat").before(section);
+
+        //Mettre à jour les données de la page
+        $("#pnt_endurance_restante").text(this.character.healthPoints);
+        $("#pnt_endurance_monstre").text(this.monster.healthPoints);
+        $("section.choixCombat button#fuir").attr("disabled", false);
+    }
+
+    this.winFight = function() {
+        $("#combat .choixCombat").before("<h3>Vous avez vaincu l'ennemi!!!</h3>");
+        $("section#combat section.choixCombat").hide();
+        $("section#decision").css("display", "block");
+    }
+
+    this.runFight = function() {
+        $("#combat .choixCombat").before("<h3>Vous avez fui l'ennemi avec succès!!!</h3>");
+        $("section#combat section.choixCombat").hide();
+        $("section#decision").css("display", "block");
+    }
+
+    this.loseFight = function() {
+        alert("You lost the fight!");
+    }
+}
+
+function Monster(name, healthPoints, skillPoints) {
+    this.name = name;
+    this.healthPoints = healthPoints;
+    this.skillPoints = skillPoints;
+}
+
+// Class Character
+// Class to represent the character and it's properties
+// @param[in]   String              name:           Name of the character
+// @param[in]   Integer             skillsPoints:   Skills points of the character
+// @param[in]   Integer             healthPoints:   Health points of the character
+// @param[in]   Integer             goldPoints:     Gold points of the character  
+// @param[in]   Array<Skill>        skills:         List of skills that the character has
+// @param[in]   Array<Equipment>    equipment:      List of equipment that the character has
+function Character(name, skillsPoints, healthPoints, gold, skills, equipment) {
+    this.name = name;
+    this.healthPoints = healthPoints;
+    this.skillPoints = skillsPoints;
+    this.gold = gold;
+    this.skills = skills;
+    this.equipment = equipment;
+}
+
+function initBackpack() {
+    if ( $("#jeterObjets").size() ) {
+        $("section#decision").css("display", "none");
+        $("section#jeterObjets ~ p").css("display", "none");
+        $("section#story p.situation ~ p").css("display", "none");
+
+        $("section#jeterObjets button").click( function() {
+                var checkedObjets = $("section#jeterObjets input:checked");
+                if (checkedObjets.length != 2) {
+                        alert('Vous devez jeter EXACTEMENT deux objets de votre sac à dos');
+                } else {
+                    jQuery.each(checkedObjets, function() {
+                        var checkedObjectName = this.name;
+                        $('section#sac_a_dos li[name="' + checkedObjectName + '"]').remove();
+                    });
+
+                    $("section#decision").css("display", "block");
+                    $("section#jeterObjets ~ p").css("display", "block");
+                    $("section#jeterObjets button").css("display", "none");
+                }
+        });
+    }
+}
+
+function updateDecisionUI() {
+
+    var requiredSkills = $("section#decision p i span");
+    var disciplines = #{toJSON $ disciplines person}
+
+    requiredSkills = requiredSkills.filter(function(n) {
+        return disciplines.indexOf($(requiredSkills[n]).text()) == -1
+    });
+
+    for (i = 0; i < requiredSkills.length; i++) {
+        var skill = $(requiredSkills[i]).parent().parent().find("a").addClass("disabled");
+    }
+}
+
+function confirmHealthLoss() {
+
+    if ( $("#confirmLossPnt").size() ) {
+        $("section#decision").css("display", "none");
+        $("section#jeterObjets ~ p").css("display", "none");
+        $("section#story p.situation ~ p").css("display", "none");
+
+        $("button#confirmLossPnt").click (function() {
+            var lifePoints = $("section#stats #pnt_endurance_restante");
+            var lifeLoss = $("section#story p.situation #lifeLost").text();
+            lifePoints.text(lifePoints.text() - lifeLoss);
+            $(this).css("display", "none");
+            $("section#story p.situation ~ p").css("display", "block");
+            $("section#decision").css("display", "block");
+        });
+    }
+}
+
+$(document).ready( function() {
+
+    $("nav #jeu").addClass("current");
+    
+    initFightSection();
+
+    initBackpack();
+	
+    updateDecisionUI();
+
+    confirmHealthLoss();
+
+    // Action a exécuté lorsque l'utilisateur désire changer de page
+    $("section#decision a").click( function() {
+        var pageNumberId = $(this).attr("id");
+
+        var characterHealth = $("section#stats #pnt_endurance_restante").text();
+        var characterSkill = $("section#stats #nb_pnt_attaque").text();
+        var characterGold = $("section#stats #nb_pieces_or").text();
+        var characterDisciplines = $("section#stats #disciplines li");
+        var characterItems = $("section#sac_a_dos li");
+
+        var disciplinesArray = [];
+        jQuery.each(characterDisciplines, function(index, value) {
+        	disciplinesArray.push('"' + $(value).text() + '"');
+        });
+
+        var itemsArray = []
+        jQuery.each(characterItems, function(index, value) {
+        	itemsArray.push('"' + $(value).text() + '"');
+        });
+
+        //#{toJSON $ show $ pntEndurance person}
+
+        $('form#invisibleForm input[name="characterLife"]').val(characterHealth);
+        $('form#invisibleForm input[name="characterSkill"]').val(characterSkill);
+        $('form#invisibleForm input[name="characterGold"]').val(characterGold);
+        $('form#invisibleForm input[name="characterDisciplines"]').val("[" + disciplinesArray + "]");
+        $('form#invisibleForm input[name="characterItems"]').val("[" + itemsArray + "]");
+
+        $('form#invisibleForm input[name="currentPage"]').val(pageNumberId);
+
+        $('#invisibleForm').submit();
+    });
+
+});
