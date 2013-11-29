@@ -1,9 +1,0 @@
-<img src="../static/img/lonewolf.gif">
-<section id="perso_creation">
- <h1>CRÉATION DU PERSONNAGE
-
- <form method="post" action=@{InitJeuR} enctype=#{enctype}>
-  ^{widget}
-  <input type="submit" class="button" value="Jouer!">
-
-  
