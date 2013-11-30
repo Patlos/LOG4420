@@ -2,6 +2,7 @@ module Handler.Service where
 
 import Import
 import Data.List (find)
+import Data.Text (unpack)
 
 data ContentElement = Paragraph Text | Image Text Bool | Battle Text Text Text | Throw Int | LossPoints Int Text deriving (Show, Read)
 
@@ -17,7 +18,8 @@ data Page = Page { paragraph :: [ContentElement],
 instance ToJSON ContentElement where
      toJSON content = case content of
                         Paragraph t -> object ["p" .= t]
-                        Image t b -> object ["image" .= object ["src" .= t]]
+                        Image t b -> object ["image" .= object ["src" .= t,
+                                                                "imgNotGameOver" .= if b == True then unpack "true" else unpack "false"]]
                         Battle t1 t2 t3 -> object ["battle" .= object ["enemy" .= t1,
                                                                        "habilete" .= t2,
                                                                        "endurance" .= t3]]
@@ -59,6 +61,10 @@ pages = [
                Paragraph "A trois cents mètres de la rive, vous observez que vous pouvez mettre pied à terre à deux endroits."] 
               [Decision 135 "Si vous désirez débarquer sur la jetée en pierre qui s'étend à l'ouest de Kazan-Oud,",
                Decision 288 "Si vous préférez accoster dans une petite crique bien abritée, à l'est de Kazan-Oud,"]),
+      (57,Page [Paragraph "Vous pressentez que ces cordes et ces rochers ne sont pas ce qu'ils paraissent, car il s'en dégage une forte aura de maléfice. Vous tentez de percer le mystère mais votre concentration se trouve brusquement brisée : votre esquif fait une brusque embardée vers la jetée, et la collision n'est plus qu'une question de secondes."] 
+               [Decision 325 "Si vous voulez vous jeter à l'eau afin de ne pas vous écraser contre la jetée en pierre en même temps que votre bateau",
+                Decision 203 "Si vous désirez saisir l'une des cordes qui pendent",
+                Decision 239 "Si vous préférez fermer les yeux et attendre le choc en priant pour en sortir vivant"]),
       (121,Page [Paragraph "Le tentacule vous arrache du sol et, de seconde en seconde, resserre son étreinte jusqu'à ce que vous puissiez à peine respirer. Soudain, vous vous sentez précipité vers un autre bloc de rocher qui s'ouvre en deux pour découvrir une monstrueuse mâchoire dégoulinante de salive. La chose vous engloutit en un clin d'œil.",
                  Paragraph "Votre vie et votre aventure se terminent, hélas, ici.",
                  Image "gameover.jpg" False] 
