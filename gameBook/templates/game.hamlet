@@ -1,66 +1,67 @@
-<header>
-    <img src=@{StaticR img_castle_death_logo_png} />
-    <p>{{currentPage}}
+<section class="game" ng-controller="gameController">
+    <header>
+        <img src=@{StaticR img_castle_death_logo_png} />
+        <p>{{currentPage}}
 
-<section id="story" ng-controller="gameController">
+    <section id="story">
 
-    <p ng-repeat="paragraph in story" > {{paragraph}}
+        <p ng-repeat="paragraph in story" > {{paragraph}}
 
-    <img class="monster" src=static/img/{{imageName}} ng-show="monsterPicture()" />
+        <img class="monster" src=static/img/{{imageName}} ng-show="monsterPicture()" />
 
-    <section id="combat" ng-show="battle()">
-        <p id="monster_name"><strong>{{monsterName}}</strong> : HABILETÉ <span id="pnt_attaque_monstre">{{monsterSkill}}</span> ENDURANCE <span id="pnt_endurance_monstre">{{monsterLife}}</span>
-        <section class="choixCombat">
-            <button id="combattre" class="button" ng-click="combattre()">COMBATTRE
-            <button id="fuir" class="button" ng="fuir()">FUIR
+        <section id="combat" ng-show="battle()">
+            <p id="monster_name"><strong>{{monsterName}}</strong> : HABILETÉ <span id="pnt_attaque_monstre">{{monsterSkill}}</span> ENDURANCE <span id="pnt_endurance_monstre">{{monsterLife}}</span>
+            <section class="choixCombat">
+                <button id="combattre" class="button" ng-click="combattre()">COMBATTRE
+                <button id="fuir" class="button" ng="fuir()">FUIR
 
-    <section id="jeterObjets" ng-show="discardItems()">
-        <fieldset>
-            <legend>Choisir {{numberItems}} items à jeter</legend>
-                <input type="checkbox" name={{item}} ng-repeat-start="item in items"/>
-                <label ng-repeat-end>{{item.item}}
-        <button class="button" ng-click="JetterItems()">Jeter!
+        <section id="jeterObjets" ng-show="discardItems()">
+            <fieldset>
+                <legend>Choisir {{numberItems}} items à jeter</legend>
+                    <input type="checkbox" name={{item}} ng-repeat-start="item in items"/>
+                    <label ng-repeat-end>{{item.item}}
+            <button class="button" ng-click="JetterItems()">Jeter!
 
-    <p class="situation" ng-show= "situation()">{{situationText}} (vous perdez 
-        <span id="lifeLost">{{pointsLost}} 
-            points d'ENDURANCE).
-            <button id="confirmLossPnt" class="button" ng-click="situationAction()">Confirmer
+        <p class="situation" ng-show= "situation()">{{situationText}} (vous perdez 
+            <span id="lifeLost">{{pointsLost}} 
+                points d'ENDURANCE).
+                <button id="confirmLossPnt" class="button" ng-click="situationAction()">Confirmer
 
-    <section id="decision" ng-show="decision()">
-        <img src=@{StaticR img_decision_png} />
-        <div>
-            <p ng-repeat="decision in decisions"> {{decision[1]}}, 
-                <a id={{decision[0]}}> rendez-vous au {{decision[0]}}.</a>
+        <section id="decision" ng-show="decision()">
+            <img src=@{StaticR img_decision_png} />
+            <div>
+                <p ng-repeat="decision in decisions"> {{decision[1]}}, 
+                    <a id={{decision[0]}}> rendez-vous au {{decision[0]}}.</a>
 
-    <a href=@{InitGameR} id="recommencer" class="button">Recommencer l'histoire
+        <a href=@{InitGameR} id="recommencer" class="button">Recommencer l'histoire
 
-<section id="stats">
-    <img src=@{StaticR img_scroll_jpg} />
-    <div id="stats_data">
-        <h2>État courant du joueur
-        <table>
-            <tr>
-                <td class="left"><img src=@{StaticR img_points_endurance_png} />
-                <td class="right"><span id="pnt_endurance_restante">{{pntEndurance}}</span> / <span id="pnt_endurance_total">{{pntEndurance}}</span>
+    <section id="stats">
+        <img src=@{StaticR img_scroll_jpg} />
+        <div id="stats_data">
+            <h2>État courant du joueur
+            <table>
+                <tr>
+                    <td class="left"><img src=@{StaticR img_points_endurance_png} />
+                    <td class="right"><span id="pnt_endurance_restante">{{pntEndurance}}</span> / <span id="pnt_endurance_total">{{pntEndurance}}</span>
 
-            <tr id="pnt_attaque">
-                <td class="left"><img src=@{StaticR img_points_attaque_png} />
-                <td class="right"><span id="nb_pnt_attaque">{{pntHabilete}}</span>
+                <tr id="pnt_attaque">
+                    <td class="left"><img src=@{StaticR img_points_attaque_png} />
+                    <td class="right"><span id="nb_pnt_attaque">{{pntHabilete}}</span>
 
-            <tr>
-                <td class="left"><img src=@{StaticR img_pieces_or_png} />
-                <td class="right"><span id="nb_pieces_or">{{piecesOr}}</span> / 50
+                <tr>
+                    <td class="left"><img src=@{StaticR img_pieces_or_png} />
+                    <td class="right"><span id="nb_pieces_or">{{piecesOr}}</span> / 50
 
-        <h3>Disciplines
-        <ul id="disciplines">
-                <li ng-repeat="discipline in disciplines"> {{discipline}}
+            <h3>Disciplines
+            <ul id="disciplines">
+                    <li ng-repeat="discipline in disciplines"> {{discipline.discipline}}
 
-<p><a href=@{GameR}#lightbox class="button">Regarder Sac À Dos</a></p>
+    <p><a href=@{GameR}#lightbox class="button">Regarder Sac À Dos</a></p>
 
- <div id="lightbox">
-    <section id="sac_a_dos">
-        <a href="#" class="close_msg"></a>
-        <img src=@{StaticR img_backpack_png} />
-        <ul>
-            <li name={{item}} ng-repeat="item in items"}>{{item.item}}
+     <div id="lightbox">
+        <section id="sac_a_dos">
+            <a href="#" class="close_msg"></a>
+            <img src=@{StaticR img_backpack_png} />
+            <ul>
+                <li name={{item}} ng-repeat="item in items"}>{{item.item}}
 
