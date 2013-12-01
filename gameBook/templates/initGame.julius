@@ -25,6 +25,7 @@ gameBook.service('PersonModel',function(){
 		window.localStorage.setItem("pnt_endurance_total", pEndurance);
 		window.localStorage.setItem("pnt_endurance", pEndurance);
 		window.localStorage.setItem("pieces_or", pOr);
+
 		disciplines = jQuery.map(disciplines, function(a) {
 				return {'name': $(a).attr('for'), 'discipline': $(a).text()};
 		});
@@ -83,7 +84,9 @@ function submitPersonForm($scope, $http, PersonModel) {
 			
 			PersonModel.setPersonLocalStorage(pntHabilete,pntEndurance,piecesOr,disciplineNames,itemNames);
 			
-			$('form').submit(true);
+			window.localStorage.setItem("pageActuelle", 1);
+            $('form').submit(true);
+
 		} else {
 			alert(messageError);
 			$('form').submit(false);

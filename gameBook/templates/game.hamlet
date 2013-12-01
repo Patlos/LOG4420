@@ -1,37 +1,36 @@
-<section class="game" ng-controller="gameController">
+<section class="game" ng-controller="gameController" ng-init="initPage()">
     <header>
         <img src=@{StaticR img_castle_death_logo_png} />
         <p>{{currentPage}}
 
     <section id="story">
 
-        <p ng-repeat="paragraph in story" > {{paragraph}}
+        <p ng-repeat-start="elementContent in story" ng-hide="!elementContent.p.length" > {{elementContent.p}}
+        <img class="monster" src=static/img/{{elementContent.image.src}} ng-hide="!elementContent.image.src.length" />
 
-        <img class="monster" src=static/img/{{imageName}} ng-show="monsterPicture()" />
-
-        <section id="combat" ng-show="battle()">
-            <p id="monster_name"><strong>{{monsterName}}</strong> : HABILETÉ <span id="pnt_attaque_monstre">{{monsterSkill}}</span> ENDURANCE <span id="pnt_endurance_monstre">{{monsterLife}}</span>
+        <section id="combat" ng-hide="!elementContent.battle.endurance.length">
+            <p id="monster_name"><strong>{{elementContent.battle.enemy}}</strong> : HABILETÉ <span id="pnt_attaque_monstre">{{elementContent.battle.habilete}}</span> ENDURANCE <span id="pnt_endurance_monstre">{{elementContent.battle.endurance}}</span>
             <section class="choixCombat">
                 <button id="combattre" class="button" ng-click="combattre()">COMBATTRE
                 <button id="fuir" class="button" ng="fuir()">FUIR
 
-        <section id="jeterObjets" ng-show="discardItems()">
+        <section id="jeterObjets" ng-hide="displayThrow(elementContent.throw)">
             <fieldset>
-                <legend>Choisir {{numberItems}} items à jeter</legend>
+                <legend>Choisir {{elementContent.throw}} items à jeter</legend>
                     <input type="checkbox" name={{item}} ng-repeat-start="item in items"/>
                     <label ng-repeat-end>{{item.item}}
             <button class="button" ng-click="JetterItems()">Jeter!
 
-        <p class="situation" ng-show= "situation()">{{situationText}} (vous perdez 
-            <span id="lifeLost">{{pointsLost}} 
+        <p class="situation" ng-hide="!elementContent.lossPoints.text.length" ng-repeat-end >{{elementContent.lossPoints.text}} (vous perdez 
+            <span id="lifeLost">{{elementContent.lossPoints.lossPoint}} 
                 points d'ENDURANCE).
-                <button id="confirmLossPnt" class="button" ng-click="situationAction()">Confirmer
+                    <button id="confirmLossPnt" class="button" ng-click="situationAction()">Confirmer
 
-        <section id="decision" ng-show="decision()">
+        <section id="decision" >
             <img src=@{StaticR img_decision_png} />
             <div>
-                <p ng-repeat="decision in decisions"> {{decision[1]}}, 
-                    <a id={{decision[0]}}> rendez-vous au {{decision[0]}}.</a>
+                <p ng-repeat="decision in decisions"> {{decision.decisionText}} 
+                    <a id={{decision.nextPage}} ng-click="nextPage(decision.nextPage)"> rendez-vous au {{decision.nextPage}}.</a>
 
         <a href=@{InitGameR} id="recommencer" class="button">Recommencer l'histoire
 

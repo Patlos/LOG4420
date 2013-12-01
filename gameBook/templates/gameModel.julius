@@ -23,7 +23,15 @@ gameBook.service('gameModel', function() {
       }
       return items;
     };
-    
+
+    this.getCurrentPage = function() {
+      var items = JSON.parse(window.localStorage.getItem("pageActuelle"));
+      if (!items) {
+        return "";
+      }
+      return items;
+    };
+
   });
 
 
