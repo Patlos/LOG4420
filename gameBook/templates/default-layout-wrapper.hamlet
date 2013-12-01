@@ -4,7 +4,7 @@ $newline never
 \<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 \<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
 \<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en" ng-app> <!--<![endif]-->
+<html class="no-js" lang="en" ng-app="gameBook"> <!--<![endif]-->
     <head>
         <meta charset="UTF-8">
 
@@ -31,7 +31,7 @@ $newline never
         <script>
           document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
 
-    <body ng-controller="gameController">
+    <body>
         <div class="container">
             <nav>
                 <ul>

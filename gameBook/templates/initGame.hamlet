@@ -3,6 +3,6 @@
 <section id="perso_creation">
     <h1>CRÉATION DU PERSONNAGE
 
-    <form method=post action=@{InitGameR}>
+    <form method=post action=@{InitGameR} ng-controller="submitPersonForm">
         ^{formWidget}
-        <input type="submit" class="button" value="Jouer!" />
+        <input type="submit" class="button" value="Jouer!" ng-click="createPerson()"/>

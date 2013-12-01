@@ -63,9 +63,7 @@
             $scope.decision = function(){
                 return $scope.decisionsPageNumber[0] != "";
             };
-
-
-         };
+};
 
 var currentCharacter = null;
 

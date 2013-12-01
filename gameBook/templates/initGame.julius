@@ -16,4 +16,80 @@ $(document).ready( function() {
     $( "#pnt_habilete" ).val(Math.floor((Math.random()*10)+10));
     $( "#pnt_endurance" ).val(Math.floor((Math.random()*10)+20));
     $( "#pieces_or" ).val(Math.floor((Math.random()*10)+10));
+	
 });
+
+var gameBook = angular.module('gameBook', []);
+
+//definir la model pour la personne
+gameBook.service('PersonModel',function(){
+	this.setPersonLocalStorage = function(pHabilete,pEndurance,pOr,disciplines,items) {
+		window.localStorage.setItem("pnt_habilete", pHabilete);
+		window.localStorage.setItem("pnt_endurance_total", pEndurance);
+		window.localStorage.setItem("pnt_endurance", pEndurance);
+		window.localStorage.setItem("pieces_or", pOr);
+		disciplines = jQuery.map(disciplines, function(a) {
+				return {'name': $(a).attr('for'), 'discipline': $(a).text()};
+		});
+		window.localStorage.setItem("disciplines", JSON.stringify(disciplines));
+		items = jQuery.map(items, function(a) {
+				return {'name': $(a).attr('for'), 'item': $(a).text()};
+		});
+		window.localStorage.setItem("items", JSON.stringify(items));
+    };
+	
+	this.setEnduranceLS = function(pEndurance){
+		window.localStorage.setItem("pnt_endurance", pEndurance);
+	}
+	
+	this.setItemsLS = function(items){
+		items = jQuery.map(items, function(a) {
+				return {'name': $(a).attr('for'), 'item': $(a).text()};
+		});
+		window.localStorage.setItem("items", JSON.stringify(items));
+	}
+});
+
+//definir le controleur qui permet de modifier le localstorage quand le formulaire est submite
+function submitPersonForm($scope, $http, PersonModel) {
+	$scope.createPerson = function() {
+		var checkedDisciplines = $("fieldset#disciplines input:checked");
+		var checkedObjects = $("fieldset#objets input:checked");
+		var checkedWeapons = $("fieldset#objets input.weapon:checked");
+
+		var disciplineError = "Vous devez choisir EXACTEMENT 3 disciplines";
+		var objectsError = "Vous devez choisir EXACTEMENT 5 objets.";
+		var weaponError = "Vous ne devez pas avoir plus de 2 armes.";
+
+		var messageError = "";
+
+		if (checkedDisciplines.length != 3) {
+			messageError += disciplineError + '\n';
+		}
+		
+		if (checkedObjects.length != 5) {
+			messageError += objectsError + '\n';
+		}
+		
+		if (checkedWeapons.length > 2) {
+			messageError += weaponError + '\n';
+		}
+
+
+		if (messageError == "") {
+			var pntHabilete = $("#pnt_habilete").val();
+			var pntEndurance = $("#pnt_endurance").val();
+			var piecesOr = $("#pieces_or").val();
+			
+			var disciplineNames = $(checkedDisciplines).next();
+			var itemNames = $(checkedObjects).next();
+			
+			PersonModel.setPersonLocalStorage(pntHabilete,pntEndurance,piecesOr,disciplineNames,itemNames);
+			
+			$('form').submit(true);
+		} else {
+			alert(messageError);
+			$('form').submit(false);
+		}
+	};
+}
