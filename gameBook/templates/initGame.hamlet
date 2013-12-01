@@ -6,3 +6,5 @@
     <form method=post action=@{InitGameR} ng-controller="submitPersonForm">
         ^{formWidget}
         <input type="submit" class="button" value="Jouer!" ng-click="createPerson()"/>
+
+

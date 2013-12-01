@@ -1,0 +1,29 @@
+gameBook.service('gameModel', function() {
+
+    this.getUserStats = function(userAttr) {
+      var userStats = JSON.parse(window.localStorage.getItem(userAttr));
+      if (!userStats) {
+        return "";
+      }
+      return userStats;
+    };
+
+    this.getDisciplines = function() {
+      var disciplines = JSON.parse(window.localStorage.getItem("disciplines"));
+      if (!disciplines) {
+        return "";
+      }
+      return disciplines;
+    };
+
+    this.getItems = function() {
+      var items = JSON.parse(window.localStorage.getItem("items"));
+      if (!items) {
+        return "";
+      }
+      return items;
+    };
+    
+  });
+
+

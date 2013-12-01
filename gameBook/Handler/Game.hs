@@ -39,12 +39,6 @@ findPage :: GamePageNumber -> [(GamePageNumber, GamePage)] -> Maybe GamePage
 findPage page pages = Map.lookup page (Map.fromList pages)
 
 
-
-
-
-
-
-
 getGameR :: Handler Html
 getGameR = do
     sess <- getSession
@@ -58,6 +52,7 @@ getGameR = do
     defaultLayout $ do
         setTitle "Game"
         $(widgetFile "game")
+        $(widgetFile "gameModel")
         $(widgetFile "playerStats")
         $(widgetFile "backpack")
 

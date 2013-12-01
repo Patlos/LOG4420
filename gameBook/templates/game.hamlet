@@ -1,8 +1,8 @@
 <header>
     <img src=@{StaticR img_castle_death_logo_png} />
-    <p>
+    <p>{{currentPage}}
 
-<section id="story" >
+<section id="story" ng-controller="gameController">
 
     <p ng-repeat="paragraph in story" > {{paragraph}}
 
@@ -18,7 +18,7 @@
         <fieldset>
             <legend>Choisir {{numberItems}} items à jeter</legend>
                 <input type="checkbox" name={{item}} ng-repeat-start="item in items"/>
-                <label ng-repeat-end>{{item}}
+                <label ng-repeat-end>{{item.item}}
         <button class="button" ng-click="JetterItems()">Jeter!
 
     <p class="situation" ng-show= "situation()">{{situationText}} (vous perdez 
@@ -62,5 +62,5 @@
         <a href="#" class="close_msg"></a>
         <img src=@{StaticR img_backpack_png} />
         <ul>
-            <li name={{item}} ng-repeat="item in items"}>{{item}}
+            <li name={{item}} ng-repeat="item in items"}>{{item.item}}
 

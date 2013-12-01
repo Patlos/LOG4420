@@ -1,6 +1,3 @@
-/*
- * On attend que le DOM qui complètement créé avant de exécuter les fonctions
- */
 $(document).ready( function() {
 
     $("nav #jeu").addClass("current");

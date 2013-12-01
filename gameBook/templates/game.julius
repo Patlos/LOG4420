@@ -1,69 +1,72 @@
- function gameController($scope, $http) {
-            
-            $scope.decisions = [["121","allo"],["325", "Voila"],["205", "Ok"]]
-            
-            $scope.currentPage = 1;
-            $scope.imageMonster = "monster_luminous_jelly.png";
-            $scope.story = ["Vous pressentez que ces cordes et ces rochers ne sont pas ce qu'ils paraissent, car il s'en dégage une forte aura de maléfice.", " Vous tentez de percer le mystère mais votre concentration se trouve brusquement brisée : votre esquif fait une brusque embardée vers la jetée, et la collision n'est plus qu'une question de secondes."] 
-           
-            $scope.monsterName = "Luminous Jelly";
-            $scope.monsterSkill = 12;
-            $scope.monsterLife = 15;
+gameBook.controller('gameController', function ($scope, $http, gameModel) {
 
-            $scope.numberItems = 2;
+    $scope.decisions = [["121","allo"],["325", "Voila"],["205", "Ok"]]
+    
+    $scope.currentPage = 1;
+    $scope.imageMonster = "monster_luminous_jelly.png";
+    $scope.story = ["Vous pressentez que ces cordes et ces rochers ne sont pas ce qu'ils paraissent, car il s'en dégage une forte aura de maléfice.", " Vous tentez de percer le mystère mais votre concentration se trouve brusquement brisée : votre esquif fait une brusque embardée vers la jetée, et la collision n'est plus qu'une question de secondes."] 
+   
+    $scope.monsterName = "Luminous Jelly";
+    $scope.monsterSkill = 12;
+    $scope.monsterLife = 15;
 
-            $scope.situationText = "Pour la raison suivant vous devez perdre des points";
-            $scope.pointsLost = 2;
+    $scope.numberItems = 2;
 
-            $scope.disciplines = ["weaponMastery","animalControl","curing"];
-            $scope.piecesOr = 10;
-            $scope.pntHabilete = 12;
-            $scope.pntEndurance = 15;
+    $scope.situationText = "Pour la raison suivant vous devez perdre des points";
+    $scope.pointsLost = 2;
 
-            $scope.items = ["épée","corde","potion magique"];
+    $scope.disciplines = gameModel.getDisciplines();
+    $scope.piecesOr = gameModel.getUserStats("pieces_or");
+    $scope.pntHabilete = gameModel.getUserStats("pnt_habilete");
+    $scope.pntEndurance = gameModel.getUserStats("pnt_endurance");
+    $scope.items = gameModel.getItems();
 
-            $scope.nextPage = function(pageNumber){
-                $http({method: 'GET', url: 'http://localhost:3000/service' + pageNumber})
-                 .success(function(data) { $scope.info = data.info; })
-                 .error(function(data) { $scope.info = "erreur"; })
-            };
+    $scope.nextPage = function(pageNumber){
+        $http({method: 'GET', url: 'http://localhost:3000/service' + pageNumber})
+         .success(function(data) { $scope.info = data.info; })
+         .error(function(data) { $scope.info = "erreur"; })
+    };
 
-            $scope.monsterPicture = function(){
-                return $scope.imageMonster != "";
-            };
+    $scope.monsterPicture = function(){
+        return $scope.imageMonster != "";
+    };
 
-            $scope.battle = function(){
-                return $scope.monsterName != "";
-            };
+    $scope.battle = function(){
+        return $scope.monsterName != "";
+    };
 
-            $scope.combattre = function(){
+    $scope.combattre = function(){
 
-            };
+    };
 
-            $scope.fuir = function(){
+    $scope.fuir = function(){
 
-            };
+    };
 
-            $scope.discardItems = function(){
-                return $scope.numberItems != -1;
-            };
+    $scope.discardItems = function(){
+        return $scope.numberItems != -1;
+    };
 
-            $scope.JetterItems = function(){
+    $scope.JetterItems = function(){
 
-            };
+    };
 
-            $scope.situation = function(){
-                return $scope.situationText != "";
-            };
+    $scope.situation = function(){
+        return $scope.situationText != "";
+    };
 
-            $scope.situationAction = function(){
-                $scope.pntEndurance = $scope.pntEndurance - $scope.pointsLost;
-            };
+    $scope.situationAction = function(){
+        $scope.pntEndurance = $scope.pntEndurance - $scope.pointsLost;
+    };
 
-            $scope.decision = function(){
-                return $scope.decisionsPageNumber[0] != "";
-            };
-};
+    $scope.decision = function(){
+        return $scope.decisionsPageNumber[0] != "";
+    };
+    
+  }
+  );
+
+
 
 var currentCharacter = null;
 
