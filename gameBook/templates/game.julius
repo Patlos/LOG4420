@@ -9,6 +9,7 @@ gameBook.controller('gameController', function ($scope, $http, gameModel) {
     $scope.piecesOr = gameModel.getUserStats("pieces_or");
     $scope.pntHabilete = gameModel.getUserStats("pnt_habilete");
     $scope.pntEndurance = gameModel.getUserStats("pnt_endurance");
+    $scope.pntEnduranceTotal = gameModel.getUserStats("pnt_endurance_total");
     $scope.items = gameModel.getItems();
 
     $scope.initPage = function(){
@@ -19,7 +20,6 @@ gameBook.controller('gameController', function ($scope, $http, gameModel) {
     };
 
     $scope.nextPage = function(pageNumber){
-        console.log(pageNumber);
         window.localStorage.setItem("pageActuelle", pageNumber);
         location.reload();
 
@@ -41,12 +41,9 @@ gameBook.controller('gameController', function ($scope, $http, gameModel) {
 
     };
 
-    $scope.situationAction = function(){
-        $scope.pntEndurance = $scope.pntEndurance - $scope.pointsLost;
-    };
-
-    $scope.decision = function(){
-        return $scope.decisionsPageNumber[0] != "";
+    $scope.situationAction = function(pointLost){
+        $scope.pntEndurance = $scope.pntEndurance - pointLost ;
+        window.localStorage.setItem("pnt_endurance", $scope.pntEndurance);
     };
     
   }

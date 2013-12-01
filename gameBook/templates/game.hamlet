@@ -24,7 +24,7 @@
         <p class="situation" ng-hide="!elementContent.lossPoints.text.length" ng-repeat-end >{{elementContent.lossPoints.text}} (vous perdez 
             <span id="lifeLost">{{elementContent.lossPoints.lossPoint}} 
                 points d'ENDURANCE).
-                    <button id="confirmLossPnt" class="button" ng-click="situationAction()">Confirmer
+                    <button id="confirmLossPnt" class="button" ng-click="situationAction(elementContent.lossPoints.lossPoint)">Confirmer
 
         <section id="decision" >
             <img src=@{StaticR img_decision_png} />
@@ -41,7 +41,7 @@
             <table>
                 <tr>
                     <td class="left"><img src=@{StaticR img_points_endurance_png} />
-                    <td class="right"><span id="pnt_endurance_restante">{{pntEndurance}}</span> / <span id="pnt_endurance_total">{{pntEndurance}}</span>
+                    <td class="right"><span id="pnt_endurance_restante">{{pntEndurance}}</span> / <span id="pnt_endurance_total">{{pntEnduranceTotal}}</span>
 
                 <tr id="pnt_attaque">
                     <td class="left"><img src=@{StaticR img_points_attaque_png} />
