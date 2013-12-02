@@ -7,7 +7,7 @@
 
         <p ng-repeat="paragraph in story" > {{paragraph}}
         
-        <img class="monster" src=static/img/{{img}} ng-repeat="img in image" />
+        <img class={{img.class}} src=static/img/{{img.src}} ng-repeat="img in image" />
 
         <section id="combat"  ng-repeat="fight in battles">
             <p id="monster_name"><strong>{{fight.enemy}}</strong> : HABILETÉ <span id="pnt_attaque_monstre">{{fight.habilete}}</span> ENDURANCE <span id="pnt_endurance_monstre">{{fight.endurance}}</span>
@@ -26,6 +26,8 @@
             <span id="lifeLost">{{situation.lossPoint}} 
             points d'ENDURANCE).
             <button id="confirmLossPnt" class="button" ng-click="situationAction(situation.lossPoint)">Confirmer
+
+        <p class="paraphForDecision" ng-repeat="pForDecision in paraphsForDecision" style="display:none;">{{pForDecision}}
 
         <section id="decision" >
             <img src=@{StaticR img_decision_png} />

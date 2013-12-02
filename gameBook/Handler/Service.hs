@@ -12,6 +12,7 @@ data Decision = Decision
 	} deriving (Show, Read)
 
 data Page = Page { paragraph :: [ContentElement],
+                   paraphForDecision :: [Text],
                    decision :: [Decision]} 
                   deriving Show
 
@@ -19,7 +20,7 @@ instance ToJSON ContentElement where
      toJSON content = case content of
                         Paragraph t -> object ["p" .= t]
                         Image t b -> object ["image" .= object ["src" .= t,
-                                                                "imgNotGameOver" .= if b == True then unpack "true" else unpack "false"]]
+                                                                "class" .= if b == True then unpack "monster" else unpack "gameover"]]
                         Battle t1 t2 t3 -> object ["battle" .= object ["enemy" .= t1,
                                                                        "habilete" .= t2,
                                                                        "endurance" .= t3]]
@@ -32,8 +33,9 @@ instance ToJSON Decision where
                                                        "decisionText" .= decisionText]
 
 instance ToJSON Page where
-     toJSON (Page paragraph decision) = object ["paragraph" .= paragraph,
-                                                "decision" .= decision]
+     toJSON (Page paragraph paraphForDecision decision) = object ["paragraph" .= paragraph,
+                                                                  "paraphForDecision" .= paraphForDecision,
+                                                                  "decision" .= decision]
 
 getServiceR :: Int -> Handler Value
 getServiceR id  = do 
@@ -41,7 +43,7 @@ getServiceR id  = do
      where
        condition id (idPage, page) = id == idPage
       
-       extraire Nothing = Page [] []
+       extraire Nothing = Page [] [] []
        extraire (Just (id,p)) = p
 
 
@@ -59,46 +61,52 @@ pages = [
                Paragraph "« Ceci est une Clé de Pouvoir, explique Paido. Gardez-la précieusement car tant qu'elle sera en votre possession, il vous sera possible d'achever votre quête. Mais attention! si vous deviez la perdre, vous ne pourriez plus jamais vous échapper de l'île de Khor. » (Inscrivez la Clé de Pouvoir dans la case Objets Spéciaux de votre Feuille d'Aventure, puis mettez-la dans une de vos poches.) « A minuit, reprend Paido, mes Vakeros vous conduiront en bateau jusqu'au seuil de l'écran magique. Vous partirez ensuite à bord d'un petit canot grâce auquel vous pourrez traverser l'écran et gagner l'île de Khor. Nous prierons pour vous, Loup Solitaire ! »",
                Paragraph "Lorsque sonnent les douze coups de minuit, vous vous trouvez sur le pont d'un bateau de pêche. Le mugissement du vent dans les voiles et le grincement des cordages et des agrès sont les seuls sons qui vous accompagnent sur les eaux noires du lac Khor. Vous arrivez bientôt au pied d'un mur de lumière verte : c'est le bouclier de défense que Paido vous a décrit. Les Vakeros vous chuchotent au revoir et, après avoir sauté dans le canot, vous franchissez l'écran, vous rapprochant un peu plus à chaque coup de rame de l'île sinistre qui abrite la forteresse tant redoutée.",
                Paragraph "A trois cents mètres de la rive, vous observez que vous pouvez mettre pied à terre à deux endroits."] 
+              [] 
               [Decision 135 "Si vous désirez débarquer sur la jetée en pierre qui s'étend à l'ouest de Kazan-Oud,",
                Decision 288 "Si vous préférez accoster dans une petite crique bien abritée, à l'est de Kazan-Oud,"]),
       (57,Page [Paragraph "Vous pressentez que ces cordes et ces rochers ne sont pas ce qu'ils paraissent, car il s'en dégage une forte aura de maléfice. Vous tentez de percer le mystère mais votre concentration se trouve brusquement brisée : votre esquif fait une brusque embardée vers la jetée, et la collision n'est plus qu'une question de secondes."] 
+               [] 
                [Decision 325 "Si vous voulez vous jeter à l'eau afin de ne pas vous écraser contre la jetée en pierre en même temps que votre bateau",
                 Decision 203 "Si vous désirez saisir l'une des cordes qui pendent",
                 Decision 239 "Si vous préférez fermer les yeux et attendre le choc en priant pour en sortir vivant"]),
       (121,Page [Paragraph "Le tentacule vous arrache du sol et, de seconde en seconde, resserre son étreinte jusqu'à ce que vous puissiez à peine respirer. Soudain, vous vous sentez précipité vers un autre bloc de rocher qui s'ouvre en deux pour découvrir une monstrueuse mâchoire dégoulinante de salive. La chose vous engloutit en un clin d'œil.",
                  Paragraph "Votre vie et votre aventure se terminent, hélas, ici.",
                  Image "gameover.jpg" False] 
+                [] 
                 []),
       (135,Page [Paragraph "A la lumière d'un violent éclair vert, vous apercevez le toit éventré de Kazan-Oud ; l'espace d'une fraction de seconde, vous avez l'impression d'avoir sous les yeux la carcasse d'un gigantesque lézard. Un second éclair vient illuminer les nombreuses fenêtres du donjon qui semblent vous dévisager, comme de grands yeux creux bordés d'éclats de vitres brisées. Les remparts de pierre noire s'ornent d'une rangée de gargouilles en surplomb de la jetée ; les têtes grimaçantes tiennent chacune dans leur gueule un anneau de fer rouillé d'où partent de longues cordes souillées de limon qui se balancent mollement au gré des vagues. Le long de la jetée, l'eau est assez profonde pour permettre à un gros vaisseau d'ancrer, mais les courants de fond et la force de la marée rendent l'approche difficile pour un frêle esquif tel que le vôtre.",
                  Paragraph "Vous réalisez soudain avec effroi que la houle menace de vous écraser d'un moment à l'autre contre la jetée."] 
+                [] 
                 [Decision 135 "Si vous maîtrisez la Discipline Magnakaï de l'Intuition,",
                  Decision 203 "Si vous voulez cesser de ramer pour essayer d'attraper l'une des cordes qui pendent,",
                  Decision 325 "Si vous préférez abandonner votre bateau et vous jeter à l'eau pour gagner à la nage un banc de rochers un peu plus loin, à l'ouest,"]),
       (158,Page [Paragraph "Suffoqué par le manque d'oxygène, vous remontez péniblement à la surface et nagez vers le rivage. Vous vous hissez ensuite hors de l'eau et vous affalez, plus mort que vif, près d'un groupe de rochers à moitié enterrés dans le sable noir de la plage. Au cours de cette baignade forcée, vous avez perdu deux Objets de votre Sac à Dos, et l'eau polluée a abîmé toutes vos Provisions (rayez tous les Repas de votre Feuille d'Aventure, ainsi que deux Objets de Sac à Dos)",
-                 Throw 2,
-                 Paragraph "À peine avez-vous eu le temps de reprendre votre souffle qu'un grattement sonore se fait entendre, comme si on traînait quelque chose de très lourd entre les rochers. Soudain, une fissure verticale apparaît à la surface du rocher qui se trouve juste à votre gauche ; il en jaillit un faisceau de lumière jaune qui se pose sur vous. Ce n'est pas un rocher, mais un œil énorme !"] 
+                 Throw 2] 
+                ["À peine avez-vous eu le temps de reprendre votre souffle qu'un grattement sonore se fait entendre, comme si on traînait quelque chose de très lourd entre les rochers. Soudain, une fissure verticale apparaît à la surface du rocher qui se trouve juste à votre gauche ; il en jaillit un faisceau de lumière jaune qui se pose sur vous. Ce n'est pas un rocher, mais un œil énorme !"] 
                 [Decision 265 "Si vous voulez dégainer votre arme et attaquer la monstrueuse pupille,",
                  Decision 41 "Si vous préférez vous remettre debout et fuir vers l'à-pic rocheux qui soutient Kazan-Oud,"]),
       (203,Page [Paragraph "Les mains tremblantes, vous serrez la corde verte le plus fort possible tout en essayant de bloquer vos pieds pour ne pas glisser dans les énormes vagues qui rugissent en dessous. La coque en bois craque dans la nuit, puis le bateau est rapidement englouti sans laisser de trace. Soudain, une brusque secousse parcourt toute la longueur de la corde, et une espèce de tête de serpent surgit des eaux noires.",
                  Image "monster_big_serpent.png" True,
                  Paragraph "Elle se dresse en ondulant, et les mâchoires grandes ouvertes laissent voir de longs crochets jaunes aiguisés comme des couteaux. L'ignoble tête vous fixe de ses yeux blancs et aveugles, prête à attaquer. Vous comprenez alors avec effroi que vous vous cramponnez, en réalité, au corps d'un redoutable Lekhor !"] 
+                [] 
                 [Decision 325 "Si vous souhaitez lâcher le corps du serpent et plonger dans les eaux noires,",
                  Decision 76 "Si vous préférez tirer une arme pour vous défendre contre son attaque venimeuse,"]),
       (265,Page [Paragraph "Vous plongez votre arme dans l'œil monstrueux, et une substance fluorescente et gélatineuse s'écoule de la blessure. Un affreux cri de douleur s'élève alors du sol sous vos pieds, et des jets de vapeur jaillissent en sifflant à travers le sable.",
                  Image "monster_luminous_jelly.png" True,
-                 LossPoints 2 "Vous reculez en essayant de protéger vos yeux du cinglant nuage de sable qui tourbillonne autour de vous, mais un coup inattendu dans les jambes vous fait perdre l'équilibre et vous tombez de tout votre long sur le sol",
-                 Paragraph "Vous reculez en essayant de protéger vos yeux du cinglant nuage de sable qui tourbillonne autour de vous, mais un coup inattendu dans les jambes vous fait perdre l'équilibre et vous tombez de tout votre long sur le sol (vous perdez 2 points d'ENDURANCE).",
-                 Paragraph "Avant que vous puissiez vous relever, un tentacule vert, recouvert de verrues, s'enroule lentement autour de votre taille et vous tire lentement vers l'œil mutilé."] 
+                 LossPoints 2 "Vous reculez en essayant de protéger vos yeux du cinglant nuage de sable qui tourbillonne autour de vous, mais un coup inattendu dans les jambes vous fait perdre l'équilibre et vous tombez de tout votre long sur le sol"] 
+                ["Avant que vous puissiez vous relever, un tentacule vert, recouvert de verrues, s'enroule lentement autour de votre taille et vous tire lentement vers l'œil mutilé."] 
                 [Decision 190 "Si vous maîtrisez la Discipline Magnakaï du Foudroiement Psychique et si vous souhaitez l'utiliser,",
                  Decision 121 "Si vous ne maîtrisez pas cette discipline ou si vous ne voulez pas l'utiliser,"]),
       (288,Page [Paragraph "Vous apercevez maintenant les tours et la muraille de la sinistre forteresse, rendue plus menaçante encore par les violents éclairs de lumière verte qui déchirent le ciel et le grondement sourd du tonnerre dans le lointain. Un grand nombre de toits, de tourelles sont en ruine, et leurs décombres calcinés donnent l'impression que la forteresse a été ravagée par un incendie.",
                  Paragraph "Vous vous approchez de la petite crique en forme de fer à cheval, bien abritée au milieu de rochers noirs et déchiquetés. Au milieu de deux d'entre eux, vous remarquez un creux asséché près du rivage. Cet endroit est une cachette idéale pour votre petit bateau. Silencieusement, vous sautez du coracle et vous le tirez sur la plage vers les rochers. Mais tout à coup, vous apercevez de minuscules lumières rouges qui dansent dans l'ombre, au pied de la forteresse. Vous vous arrêtez net et, quelques secondes plus tard, vous entendez des petits cris aigus et étouffés.",
                  Paragraph "Un éclair illumine soudain la baie, et vous apercevez des centaines de rats aux yeux rouges, très maigres mais tous de la taille d'un petit chien. Ils ont l'air affamé et courent sur la plage dans votre direction, tel un furieux torrent d'eau noire. Des gouttes de sueur commencent à perler sur votre front, et votre cœur bat à tout rompre : vous devez trouver rapidement un moyen d'échapper à cette horde hurlante et féroce de rongeurs voraces."] 
+                [] 
                 [Decision 336 "Si vous souhaitez escalader les rochers et fuir le long d'une plage déserte",
                  Decision 117 "Si vous voulez remettre votre bateau à l'eau et pagayer loin de la baie",
                  Decision 45 "Si vous préférez rester où vous êtes pour combattre le flot de rats géants qui se précipite sur vous"]),
       (325,Page [Paragraph "Vous tombez au milieu des vagues et coulez comme une pierre. L'étreinte glaciale des eaux du lac engourdit vos muscles, et ses senteurs âcres et piquantes vous remplissent la bouche. Votre premier réflexe en pénétrant dans l'eau est de nager, mais vous en êtes empêché par toute une végétation aquatique qui s'enroule autour de vos membres. Manquant désespérément d'air, vous essayez rageusement de vous arracher aux algues qui menacent maintenant de vous entraîner au fond de l'eau.",
                  Paragraph "Combattez de la manière habituelle. Cependant, à cause du manque d'air, vous devrez automatiquement déduire 2 points d'ENDURANCE à chaque Assaut.",
                  Battle "ALGUES NOIRES DU LAC" "10" "50"] 
+                [] 
                 [Decision 158 "Si vous sortez vivant de cette lutte,"])]
 

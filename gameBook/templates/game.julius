@@ -47,13 +47,14 @@ gameBook.controller('gameController', function ($scope, $http, gameModel,PersonM
 						$scope.battles.push(data.paragraph[i].battle);
 					}else if(data.paragraph[i].image != undefined){
 
-						$scope.image.push(data.paragraph[i].image.src);
+						$scope.image.push(data.paragraph[i].image);
 					}else if(data.paragraph[i].lossPoints != undefined){
 
 						$scope.situations.push(data.paragraph[i].lossPoints);
 					}
 
 				}; 
+				$scope.paraphsForDecision = data.paraphForDecision;
 				if(data.decision.length == 0){
 					$("section#decision").css("display", "none");
 				}else{
@@ -133,6 +134,7 @@ gameBook.controller('gameController', function ($scope, $http, gameModel,PersonM
 		if (endurance_monstre == 0) {
 				$("#combat .choixCombat").before("<h3>Vous avez vaincu l'ennemi!!!</h3>");
 				$("section#combat section.choixCombat").css("display", "none");
+				$("p.paraphForDecision").css("display", "block");
 				$("section#decision").css("display", "block");
 		}
 
@@ -142,6 +144,7 @@ gameBook.controller('gameController', function ($scope, $http, gameModel,PersonM
 		if(numberRound>1){
 			$("#combat .choixCombat").before("<h3>Vous avez fuit l'ennemi avec succès!!!</h3>");
 			$("section#combat section.choixCombat").css("display", "none");
+			$("p.paraphForDecision").css("display", "block");
 			$("section#decision").css("display", "block");
 		}
     };
@@ -156,9 +159,8 @@ gameBook.controller('gameController', function ($scope, $http, gameModel,PersonM
 						var checkedObjectName = this.name;
 						$('section#sac_a_dos li[name="' + checkedObjectName + '"]').remove();
 				});
-
+				$("p.paraphForDecision").css("display", "block");
 				$("section#decision").css("display", "block");
-				$("section#jeterObjets ~ p").css("display", "block");
 				$("section#jeterObjets button").css("display", "none");
 		}
     };
@@ -167,7 +169,7 @@ gameBook.controller('gameController', function ($scope, $http, gameModel,PersonM
 		var lifePoints = $("section#stats #pnt_endurance_restante");
 		lifePoints.text(lifePoints.text() - pointLost);
 		$(this).css("display", "none");
-		$("section#story p.situation ~ p").css("display", "block");
+		$("p.paraphForDecision").css("display", "block");
 		$("section#decision").css("display", "block");
     };
     
