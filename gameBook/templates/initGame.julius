@@ -16,8 +16,6 @@ $(document).ready( function() {
 	
 });
 
-var gameBook = angular.module('gameBook', []);
-
 //definir la model pour la personne
 gameBook.service('PersonModel',function(){
 	this.setPersonLocalStorage = function(pHabilete,pEndurance,pOr,disciplines,items) {

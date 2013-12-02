@@ -19,6 +19,7 @@ getHomeR = do
     defaultLayout $ do
         aDomId <- newIdent
         setTitle "Welcome To Yesod!"
+        $(widgetFile "alert")
         $(widgetFile "homepage")
 
 postHomeR :: Handler Html

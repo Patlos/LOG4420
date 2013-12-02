@@ -1,0 +1,37 @@
+myPromptAlert = function(native) {
+	return function(message) {
+		try {
+			// display the alert message with the jquery ui dialog
+			jQuery("<div>" + message + "</div>").dialog({
+				modal:true, resizable:false, draggable:false,
+				buttons: {
+					OUI: function() {
+						var pageActuelle = window.localStorage.getItem("pageActuelle");
+						window.location = "@{GameR}";
+					},
+					NON: function() { 
+					    window.localStorage.clear();
+						window.location = "@{InitGameR}";
+					}
+				}
+			});
+		} catch(e) {
+			// display the alert with the native browser alert
+			native(message);
+		}
+	}
+}(window.alert);
+
+$(document).ready( function() {
+	$("nav a#jeu").click( function(e) {
+		e.preventDefault();
+		console.log(window.localStorage.getItem("pageActuelle"));
+		if ( window.localStorage.getItem("pageActuelle") != undefined) {
+			myPromptAlert("Voulez-vous continuer la partie existante?");
+
+		} else {
+			window.localStorage.clear();
+			window.location = "@{InitGameR}";
+		}
+	});
+});

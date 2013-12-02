@@ -51,6 +51,7 @@ getGameR = do
 
     defaultLayout $ do
         setTitle "Game"
+        $(widgetFile "alert")
         $(widgetFile "game")
         $(widgetFile "gameModel")
         $(widgetFile "playerStats")

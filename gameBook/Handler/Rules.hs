@@ -6,5 +6,6 @@ getRulesR :: Handler Html
 getRulesR = 
 	defaultLayout $ do
 		setTitle "Règles"
+		$(widgetFile "alert")
 		$(widgetFile "rules")
 
