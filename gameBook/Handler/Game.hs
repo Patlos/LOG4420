@@ -53,6 +53,7 @@ getGameR = do
         setTitle "Game"
         $(widgetFile "alert")
         $(widgetFile "game")
+        $(widgetFile "personModel")
         $(widgetFile "gameModel")
         $(widgetFile "playerStats")
         $(widgetFile "backpack")

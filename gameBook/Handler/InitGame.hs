@@ -11,6 +11,7 @@ getInitGameR = do
 	(formWidget, enctype) <- generateFormPost characterForm
 	defaultLayout $ do
 		setTitle "Set Game"
+		$(widgetFile "personModel")
 		$(widgetFile "initGame")
 
 postInitGameR :: Handler Html

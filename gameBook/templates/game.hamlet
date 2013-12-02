@@ -13,19 +13,19 @@
             <p id="monster_name"><strong>{{fight.enemy}}</strong> : HABILETÉ <span id="pnt_attaque_monstre">{{fight.habilete}}</span> ENDURANCE <span id="pnt_endurance_monstre">{{fight.endurance}}</span>
             <section class="choixCombat">
                 <button id="combattre" class="button" ng-click="combattre()">COMBATTRE
-                <button id="fuir" class="button" ng="fuir()">FUIR
+                <button id="fuir" class="button" ng-click="fuir()">FUIR
 
         <section id="jeterObjets" ng-repeat="jeter in jeterObjets">
             <fieldset>
-                <legend>Choisir {{throw.throw}} items à jeter</legend>
+                <legend>Choisir {{jeter}} items à jeter</legend>
                     <input type="checkbox" name={{item}} ng-repeat-start="item in items"/>
                     <label ng-repeat-end>{{item.item}}
             <button class="button" ng-click="JetterItems()">Jeter!
 
         <p class="situation" ng-repeat="situation in situations" >{{situation.text}} (vous perdez 
             <span id="lifeLost">{{situation.lossPoint}} 
-                points d'ENDURANCE).
-                    <button id="confirmLossPnt" class="button" ng-click="situationAction(situation.lossPoints.lossPoint)">Confirmer
+            points d'ENDURANCE).
+            <button id="confirmLossPnt" class="button" ng-click="situationAction(situation.lossPoint)">Confirmer
 
         <section id="decision" >
             <img src=@{StaticR img_decision_png} />
