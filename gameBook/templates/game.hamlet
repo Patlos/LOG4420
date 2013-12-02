@@ -5,26 +5,27 @@
 
     <section id="story">
 
-        <p ng-repeat-start="elementContent in story" ng-hide="!elementContent.p.length" > {{elementContent.p}}
-        <img class="monster" src=static/img/{{elementContent.image.src}} ng-hide="!elementContent.image.src.length" />
+        <p ng-repeat="paragraph in story" > {{paragraph}}
+        
+        <img class="monster" src=static/img/{{img}} ng-repeat="img in image" />
 
-        <section id="combat" ng-hide="!elementContent.battle.endurance.length">
-            <p id="monster_name"><strong>{{elementContent.battle.enemy}}</strong> : HABILETÉ <span id="pnt_attaque_monstre">{{elementContent.battle.habilete}}</span> ENDURANCE <span id="pnt_endurance_monstre">{{elementContent.battle.endurance}}</span>
+        <section id="combat"  ng-repeat="fight in battles">
+            <p id="monster_name"><strong>{{fight.enemy}}</strong> : HABILETÉ <span id="pnt_attaque_monstre">{{fight.habilete}}</span> ENDURANCE <span id="pnt_endurance_monstre">{{fight.endurance}}</span>
             <section class="choixCombat">
                 <button id="combattre" class="button" ng-click="combattre()">COMBATTRE
                 <button id="fuir" class="button" ng="fuir()">FUIR
 
-        <section id="jeterObjets" ng-hide="displayThrow(elementContent.throw)">
+        <section id="jeterObjets" ng-repeat="jeter in jeterObjets">
             <fieldset>
-                <legend>Choisir {{elementContent.throw}} items à jeter</legend>
+                <legend>Choisir {{throw.throw}} items à jeter</legend>
                     <input type="checkbox" name={{item}} ng-repeat-start="item in items"/>
                     <label ng-repeat-end>{{item.item}}
             <button class="button" ng-click="JetterItems()">Jeter!
 
-        <p class="situation" ng-hide="!elementContent.lossPoints.text.length" ng-repeat-end >{{elementContent.lossPoints.text}} (vous perdez 
-            <span id="lifeLost">{{elementContent.lossPoints.lossPoint}} 
+        <p class="situation" ng-repeat="situation in situations" >{{situation.text}} (vous perdez 
+            <span id="lifeLost">{{situation.lossPoint}} 
                 points d'ENDURANCE).
-                    <button id="confirmLossPnt" class="button" ng-click="situationAction(elementContent.lossPoints.lossPoint)">Confirmer
+                    <button id="confirmLossPnt" class="button" ng-click="situationAction(situation.lossPoints.lossPoint)">Confirmer
 
         <section id="decision" >
             <img src=@{StaticR img_decision_png} />

@@ -3,7 +3,11 @@ gameBook.controller('gameController', function ($scope, $http, gameModel) {
     $scope.decisions;
     
     $scope.currentPage = gameModel.getCurrentPage();
-    $scope.story;
+    $scope.story = [];
+    $scope.image = [];
+    $scope.battles= [];
+    $scope.jeterObjets = [];
+    $scope.situations = [];
 
     $scope.disciplines = gameModel.getDisciplines();
     $scope.piecesOr = gameModel.getUserStats("pieces_or");
@@ -14,8 +18,32 @@ gameBook.controller('gameController', function ($scope, $http, gameModel) {
 
     $scope.initPage = function(){
         $http({method: 'GET', url: 'http://localhost:3000/service/' +  $scope.currentPage})
-         .success(function(data) { $scope.story = data.paragraph;
-            $scope.decisions = data.decision;})
+         .success(function(data) { 
+                $scope.story = [];
+                $scope.image = [];
+                $scope.battles= [];
+                $scope.jeter = [];
+                for (var i = data.paragraph.length - 1; i >= 0; i--) {
+                    console.log(data.paragraph[i]);
+                    if(data.paragraph[i].p != undefined)
+                    {
+                        $scope.story.push(data.paragraph[i].p);
+                    }else if(data.paragraph[i].throw != undefined){
+
+                        $scope.jeterObjets.push(data.paragraph[i].throw);
+                    }else if(data.paragraph[i].battle != undefined){
+
+                        $scope.battles.push(data.paragraph[i].battle);
+                    }else if(data.paragraph[i].image != undefined){
+
+                        $scope.image.push(data.paragraph[i].image.src);
+                    }else if(data.paragraph[i].lossPoints != undefined){
+
+                        $scope.situations.push(data.paragraph[i].lossPoints);
+                    }
+
+                }; 
+                $scope.decisions = data.decision;})
          .error(function(data) { $scope.info = "erreur"; })
     };
 
@@ -47,7 +75,7 @@ gameBook.controller('gameController', function ($scope, $http, gameModel) {
     };
     
   }
-  );
+);
 
 
 
